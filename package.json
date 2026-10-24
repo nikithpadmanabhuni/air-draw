@@ -4,7 +4,8 @@
   "description": "Next-generation air drawing application with MediaPipe AI hand tracking, glow strokes, gesture commands, and audio feedback.",
   "scripts": {
     "start": "npx serve -l 3000 .",
-    "dev": "npx serve -l 3000 ."
+    "dev": "npx serve -l 3000 .",
+    "sync": "node auto-sync.js"
   },
   "keywords": [
     "mediapipe",
