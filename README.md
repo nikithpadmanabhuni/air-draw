@@ -16,6 +16,13 @@ npx serve -l 3000 .
 ```
 Then open **[http://localhost:3000](http://localhost:3000)** in Google Chrome, Microsoft Edge, or Safari.
 
+### 🔄 Real-Time GitHub Auto-Sync
+AirDraw Pro includes a real-time auto-sync engine that monitors workspace files, debounces rapid edits, and automatically commits and pushes all updates to GitHub (`origin main`):
+
+```bash
+npm run sync
+```
+
 ---
 
 ## ✋ Hand Gestures Reference
