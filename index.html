@@ -192,6 +192,14 @@
             z-index: 10;
         }
 
+        button.air-hover, .btn-modern.air-hover, .cheatsheet-header.air-hover, select.air-hover, input[type="range"].air-hover {
+            transform: scale(1.08) !important;
+            border-color: var(--accent-cyan) !important;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.7) !important;
+            background: rgba(0, 229, 255, 0.22) !important;
+            z-index: 50;
+        }
+
         .tool-btn.active {
             background: rgba(0, 229, 255, 0.22);
             border-color: var(--accent-cyan);
@@ -998,7 +1006,7 @@
 
         <!-- Guidance Banner for First Stroke -->
         <div id="guidanceBanner">
-            ✨ Raise your hand to the camera! Point index finger (☝️) to draw &bull; Point at palette to select color!
+            ✨ Point your finger at ANY option on screen to select it &bull; Point in open air (☝️) to draw!
         </div>
 
         <!-- Telemetry HUD -->
@@ -1057,7 +1065,7 @@
                 </div>
                 <div class="gesture-item" id="gi-touch">
                     <span class="gesture-emoji">👆</span>
-                    <div><strong>Point at Palette</strong><div class="gesture-desc">Select color / tool with finger</div></div>
+                    <div><strong>Point at Any Option</strong><div class="gesture-desc">Select any button, color, or slider with finger</div></div>
                 </div>
                 <div class="gesture-item" id="gi-pinch">
                     <span class="gesture-emoji">👌</span>
@@ -2084,52 +2092,57 @@
             }
         }
 
-        // ==================== AIR-TOUCH TOOLBAR SELECTION ====================
+        // ==================== UNIVERSAL AIR-TOUCH SCREEN SELECTION ====================
         let hoveredButton = null;
         let hoverStartTime = 0;
         let lastSelectedBtn = null;
-        let cachedToolbarButtons = [];
-        const DWELL_TIME_MS = 240; // 240ms dwell time for natural finger selection
+        const DWELL_TIME_MS = 250; // 250ms dwell time for natural, crisp finger selection
 
-        function getToolbarTargets() {
-            if (!cachedToolbarButtons || cachedToolbarButtons.length === 0) {
-                cachedToolbarButtons = Array.from(document.querySelectorAll(
-                    '#toolbar .color-btn, #toolbar .tool-btn, #toolbar .rainbow-btn, #customColorWrapper'
-                ));
+        function getScreenInteractiveTargets() {
+            // 1. If any modal dialog is currently open, focus targets strictly to the modal
+            const openDialog = document.querySelector('dialog[open]');
+            if (openDialog) {
+                return Array.from(openDialog.querySelectorAll('button, [role="button"], a')).filter(el => {
+                    const rect = el.getBoundingClientRect();
+                    return rect.width > 0 && rect.height > 0;
+                });
             }
-            return cachedToolbarButtons;
+
+            // 2. Otherwise collect all interactive elements across the entire screen
+            return Array.from(document.querySelectorAll(
+                '#toolbar button, #toolbar .color-btn, #toolbar .tool-btn, #toolbar .rainbow-btn, #customColorWrapper, #backgroundSelect, #brushSize, #opacity, #cheatsheetPanel .cheatsheet-header, #cheatsheetToggleBtn, #retryCamBtn, #startWithoutCamBtn'
+            )).filter(el => {
+                const rect = el.getBoundingClientRect();
+                return rect.width > 0 && rect.height > 0;
+            });
         }
 
-        function checkToolbarFingerTouch(point) {
+        function checkScreenFingerTouch(point) {
             const w = window.innerWidth;
             // Visual screen coordinates of user's finger on mirrored display
             const fingerScreenX = state.facingMode === 'user' ? (w - point.x) : point.x;
             const fingerScreenY = point.y;
 
-            // Check if finger is in toolbar zone (top 95px of screen)
-            if (fingerScreenY > 95) {
-                if (hoveredButton) {
-                    hoveredButton.classList.remove('air-hover');
-                    hoveredButton = null;
-                }
-                lastSelectedBtn = null;
-                return { inZone: false, progress: 0, button: null };
-            }
-
-            // Find interactive button under finger from cached list
-            const targets = getToolbarTargets();
+            const targets = getScreenInteractiveTargets();
             let found = null;
+            let isSlider = false;
+
             for (let i = 0; i < targets.length; i++) {
-                const btn = targets[i];
-                const rect = btn.getBoundingClientRect();
-                const hitPad = 10;
+                const el = targets[i];
+                const rect = el.getBoundingClientRect();
+
+                // Ergonomic hit-padding so finger pointing is effortless anywhere on screen
+                const padX = (el.tagName === 'INPUT' && el.type === 'range') ? 8 : 12;
+                const padY = (el.tagName === 'INPUT' && el.type === 'range') ? 16 : 12;
+
                 if (
-                    fingerScreenX >= rect.left - hitPad &&
-                    fingerScreenX <= rect.right + hitPad &&
-                    fingerScreenY >= rect.top - hitPad &&
-                    fingerScreenY <= rect.bottom + hitPad
+                    fingerScreenX >= rect.left - padX &&
+                    fingerScreenX <= rect.right + padX &&
+                    fingerScreenY >= rect.top - padY &&
+                    fingerScreenY <= rect.bottom + padY
                 ) {
-                    found = btn;
+                    found = el;
+                    isSlider = (el.tagName === 'INPUT' && el.type === 'range');
                     break;
                 }
             }
@@ -2137,6 +2150,28 @@
             const now = performance.now();
 
             if (found) {
+                // Mid-Air Slider Scrubbing (Brush size, Opacity)
+                if (isSlider) {
+                    if (hoveredButton && hoveredButton !== found) {
+                        hoveredButton.classList.remove('air-hover');
+                    }
+                    hoveredButton = found;
+                    found.classList.add('air-hover');
+
+                    const rect = found.getBoundingClientRect();
+                    const fraction = Math.max(0, Math.min(1, (fingerScreenX - rect.left) / rect.width));
+                    const min = parseFloat(found.min) || 0;
+                    const max = parseFloat(found.max) || 100;
+                    const val = Math.round(min + (fraction * (max - min)));
+
+                    if (found.value != val) {
+                        found.value = val;
+                        found.dispatchEvent(new Event('input', { bubbles: true }));
+                    }
+                    return { inZone: true, progress: 1, button: found };
+                }
+
+                // Buttons, Color Swatches, Dropdowns, Dialog Actions
                 if (hoveredButton !== found) {
                     if (hoveredButton) {
                         hoveredButton.classList.remove('air-hover');
@@ -2151,29 +2186,41 @@
 
                 if (progress >= 1 && lastSelectedBtn !== found) {
                     lastSelectedBtn = found;
-                    found.click();
-                    playSound('color');
 
-                    // Visual selection flash
-                    found.style.transform = 'scale(1.4)';
-                    found.style.boxShadow = '0 0 25px #fff';
+                    if (found.tagName === 'SELECT') {
+                        // Cycle through select options
+                        const nextIdx = (found.selectedIndex + 1) % found.options.length;
+                        found.selectedIndex = nextIdx;
+                        setBackgroundMode(found.value);
+                        playSound('click');
+                        showToast(`Backdrop: ${found.options[nextIdx].text}`);
+                    } else {
+                        // Standard button click
+                        found.click();
+                        playSound('color');
+                    }
+
+                    // Visual selection pulse
+                    found.style.transform = 'scale(1.22)';
+                    found.style.boxShadow = '0 0 25px var(--accent-cyan)';
                     setTimeout(() => {
                         if (found) {
                             found.style.transform = '';
                             found.style.boxShadow = '';
                         }
-                    }, 250);
+                    }, 260);
                 }
 
                 return { inZone: true, progress, button: found };
-            } else {
-                if (hoveredButton) {
-                    hoveredButton.classList.remove('air-hover');
-                    hoveredButton = null;
-                }
-                lastSelectedBtn = null;
-                return { inZone: true, progress: 0, button: null };
             }
+
+            // Finger in open drawing canvas
+            if (hoveredButton) {
+                hoveredButton.classList.remove('air-hover');
+                hoveredButton = null;
+            }
+            lastSelectedBtn = null;
+            return { inZone: false, progress: 0, button: null };
         }
 
         // ==================== GESTURE DISPATCH ====================
@@ -2374,8 +2421,8 @@
                     const indexScreen = videoToScreenCoords(landmarks[8].x, landmarks[8].y);
                     const smoothed = smoothPoint(indexScreen.x, indexScreen.y);
 
-                    // Air-touch toolbar interaction (Select with finger)
-                    const touchStatus = checkToolbarFingerTouch(smoothed);
+                    // Air-touch universal screen interaction (Select any option/button on screen with finger)
+                    const touchStatus = checkScreenFingerTouch(smoothed);
 
                     if (touchStatus.inZone) {
                         stopStroke();
