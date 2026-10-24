@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AirDraw Pro — Contactless AI Spatial Drawing</title>
-    <meta name="description" content="State-of-the-art air drawing web app powered by Google MediaPipe AI hand tracking, sub-pixel rendering, multi-camera switching, and tactile sound synthesis.">
+    <meta name="description"
+        content="State-of-the-art air drawing web app powered by Google MediaPipe AI hand tracking, sub-pixel rendering, multi-camera switching, and tactile sound synthesis.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <!-- MediaPipe Hands & Camera Utils -->
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
+        crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
 
     <style>
@@ -157,8 +163,17 @@
         }
 
         @keyframes pulse-glow {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.3); opacity: 0.8; }
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.3);
+                opacity: 0.8;
+            }
         }
 
         .tool-btn {
@@ -192,7 +207,11 @@
             z-index: 10;
         }
 
-        button.air-hover, .btn-modern.air-hover, .cheatsheet-header.air-hover, select.air-hover, input[type="range"].air-hover {
+        button.air-hover,
+        .btn-modern.air-hover,
+        .cheatsheet-header.air-hover,
+        select.air-hover,
+        input[type="range"].air-hover {
             transform: scale(1.08) !important;
             border-color: var(--accent-cyan) !important;
             box-shadow: 0 0 20px rgba(0, 229, 255, 0.7) !important;
@@ -234,7 +253,8 @@
             flex-shrink: 0;
         }
 
-        .color-btn:hover, .color-btn.air-hover {
+        .color-btn:hover,
+        .color-btn.air-hover {
             transform: scale(1.35) !important;
             border-color: #fff !important;
             box-shadow: 0 0 18px currentColor !important;
@@ -266,7 +286,8 @@
             transition: transform 0.2s;
         }
 
-        .custom-color-wrapper:hover, .custom-color-wrapper.air-hover {
+        .custom-color-wrapper:hover,
+        .custom-color-wrapper.air-hover {
             transform: scale(1.3);
             border-color: #fff;
         }
@@ -382,7 +403,7 @@
             font-weight: 600;
             color: rgba(255, 255, 255, 0.9);
             letter-spacing: 0.5px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
             pointer-events: none;
             transition: all 0.3s ease;
         }
@@ -516,8 +537,41 @@
             box-shadow: 0 0 8px var(--accent-cyan);
         }
 
+        .finger-pip.fp-color-0.up {
+            background: #ffaa00;
+            box-shadow: 0 0 10px #ffaa00;
+        }
+
+        .finger-pip.fp-color-1.up {
+            background: #00e5ff;
+            box-shadow: 0 0 10px #00e5ff;
+        }
+
+        .finger-pip.fp-color-2.up {
+            background: #ff007f;
+            box-shadow: 0 0 10px #ff007f;
+        }
+
+        .finger-pip.fp-color-3.up {
+            background: #9d4edd;
+            box-shadow: 0 0 10px #9d4edd;
+        }
+
+        .finger-pip.fp-color-4.up {
+            background: #00f076;
+            box-shadow: 0 0 10px #00f076;
+        }
+
         .finger-item.active span {
             color: var(--accent-cyan);
+        }
+
+        .air-dragging {
+            box-shadow: 0 0 35px var(--accent-cyan), 0 20px 50px rgba(0, 0, 0, 0.8) !important;
+            border-color: var(--accent-cyan) !important;
+            transition: none !important;
+            user-select: none;
+            cursor: grabbing !important;
         }
 
         /* Bottom Right Quick Gestures Cheatsheet */
@@ -659,7 +713,9 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         .loading-title {
@@ -864,27 +920,33 @@
                 gap: 5px;
                 max-width: 98vw;
             }
+
             .brand-badge {
                 font-size: 11px;
                 padding-right: 6px;
             }
+
             .tool-btn {
                 width: 32px;
                 height: 32px;
                 font-size: 14px;
             }
+
             .color-btn {
                 width: 22px;
                 height: 22px;
             }
+
             .slider-group {
                 display: none;
             }
+
             #modeHeader {
                 top: 56px;
                 font-size: 11px;
                 padding: 4px 12px;
             }
+
             #hudPanel {
                 top: auto;
                 bottom: 12px;
@@ -892,18 +954,11 @@
                 padding: 8px 10px;
                 max-width: 170px;
             }
-            #cheatsheetPanel {
-                bottom: 12px;
-                right: 12px;
-                max-width: 170px;
-                padding: 8px 10px;
-            }
-            #cheatsheetPanel.minimized .gesture-list {
-                display: none;
-            }
+
         }
     </style>
 </head>
+
 <body>
     <main id="appViewport">
         <video id="webcam" autoplay playsinline muted></video>
@@ -916,9 +971,11 @@
             <span class="camera-alert-icon">📷</span>
             <div class="camera-alert-text">
                 <strong id="cameraAlertTitle">Camera Permission Needed</strong>
-                <span id="cameraAlertMsg">AirDraw needs your webcam to trace and track your hand gestures in the air.</span>
+                <span id="cameraAlertMsg">AirDraw needs your webcam to trace and track your hand gestures in the
+                    air.</span>
             </div>
-            <button class="btn-modern btn-modern-primary" id="retryCamBtn" onclick="retryCameraPermission()" style="white-space: nowrap;">
+            <button class="btn-modern btn-modern-primary" id="retryCamBtn" onclick="retryCameraPermission()"
+                style="white-space: nowrap;">
                 Grant Camera
             </button>
         </div>
@@ -931,30 +988,44 @@
             </div>
 
             <!-- Drawing Tools -->
-            <button class="tool-btn active" id="penTool" title="Pen Mode (Key: P | Index Finger Up)" onclick="setTool('pen')" aria-label="Pen Tool">✏️</button>
-            <button class="tool-btn" id="highlighterTool" title="Highlighter Mode (Key: H)" onclick="setTool('highlighter')" aria-label="Highlighter Tool">🖍️</button>
-            <button class="tool-btn" id="laserTool" title="Laser Pointer Mode (Key: L | Fading air beam)" onclick="setTool('laser')" aria-label="Laser Pointer Tool">✨</button>
-            <button class="tool-btn" id="eraserTool" title="Eraser Mode (Key: E | Open Hand)" onclick="setTool('eraser')" aria-label="Eraser Tool">🧹</button>
+            <button class="tool-btn active" id="penTool" title="Pen Mode (Key: P | Index Finger Up)"
+                onclick="setTool('pen')" aria-label="Pen Tool">✏️</button>
+            <button class="tool-btn" id="highlighterTool" title="Highlighter Mode (Key: H)"
+                onclick="setTool('highlighter')" aria-label="Highlighter Tool">🖍️</button>
+            <button class="tool-btn" id="laserTool" title="Laser Pointer Mode (Key: L | Fading air beam)"
+                onclick="setTool('laser')" aria-label="Laser Pointer Tool">✨</button>
+            <button class="tool-btn" id="eraserTool" title="Eraser Mode (Key: E | Open Hand)"
+                onclick="setTool('eraser')" aria-label="Eraser Tool">🧹</button>
 
             <div class="separator"></div>
 
             <!-- Color Palette Swatches -->
             <div class="color-group" id="colorPaletteGroup">
-                <button class="color-btn active" data-color="#ff3355" style="background: #ff3355;" onclick="setColor('#ff3355', this)" title="Crimson [1]" aria-label="Red Color"></button>
-                <button class="color-btn" data-color="#00f076" style="background: #00f076;" onclick="setColor('#00f076', this)" title="Cyber Green [2]" aria-label="Green Color"></button>
-                <button class="color-btn" data-color="#00e5ff" style="background: #00e5ff;" onclick="setColor('#00e5ff', this)" title="Electric Cyan [3]" aria-label="Cyan Color"></button>
-                <button class="color-btn" data-color="#ffe600" style="background: #ffe600;" onclick="setColor('#ffe600', this)" title="Solar Yellow [4]" aria-label="Yellow Color"></button>
-                <button class="color-btn" data-color="#ff007f" style="background: #ff007f;" onclick="setColor('#ff007f', this)" title="Neon Pink [5]" aria-label="Pink Color"></button>
-                <button class="color-btn" data-color="#9d4edd" style="background: #9d4edd;" onclick="setColor('#9d4edd', this)" title="Vivid Purple [6]" aria-label="Purple Color"></button>
-                <button class="color-btn" data-color="#ffffff" style="background: #ffffff;" onclick="setColor('#ffffff', this)" title="Pure White [7]" aria-label="White Color"></button>
-                <button class="color-btn" data-color="#ff7700" style="background: #ff7700;" onclick="setColor('#ff7700', this)" title="Neon Orange [8]" aria-label="Orange Color"></button>
+                <button class="color-btn active" data-color="#ff3355" style="background: #ff3355;"
+                    onclick="setColor('#ff3355', this)" title="Crimson [1]" aria-label="Red Color"></button>
+                <button class="color-btn" data-color="#00f076" style="background: #00f076;"
+                    onclick="setColor('#00f076', this)" title="Cyber Green [2]" aria-label="Green Color"></button>
+                <button class="color-btn" data-color="#00e5ff" style="background: #00e5ff;"
+                    onclick="setColor('#00e5ff', this)" title="Electric Cyan [3]" aria-label="Cyan Color"></button>
+                <button class="color-btn" data-color="#ffe600" style="background: #ffe600;"
+                    onclick="setColor('#ffe600', this)" title="Solar Yellow [4]" aria-label="Yellow Color"></button>
+                <button class="color-btn" data-color="#ff007f" style="background: #ff007f;"
+                    onclick="setColor('#ff007f', this)" title="Neon Pink [5]" aria-label="Pink Color"></button>
+                <button class="color-btn" data-color="#9d4edd" style="background: #9d4edd;"
+                    onclick="setColor('#9d4edd', this)" title="Vivid Purple [6]" aria-label="Purple Color"></button>
+                <button class="color-btn" data-color="#ffffff" style="background: #ffffff;"
+                    onclick="setColor('#ffffff', this)" title="Pure White [7]" aria-label="White Color"></button>
+                <button class="color-btn" data-color="#ff7700" style="background: #ff7700;"
+                    onclick="setColor('#ff7700', this)" title="Neon Orange [8]" aria-label="Orange Color"></button>
                 <!-- Rainbow Mode -->
-                <button class="color-btn rainbow-btn" id="rainbowBtn" onclick="toggleRainbowMode()" title="Rainbow Neon Strokes [R]" aria-label="Rainbow Mode"></button>
+                <button class="color-btn rainbow-btn" id="rainbowBtn" onclick="toggleRainbowMode()"
+                    title="Rainbow Neon Strokes [R]" aria-label="Rainbow Mode"></button>
 
                 <!-- Custom Color Picker -->
                 <div class="custom-color-wrapper" title="Pick Custom Color" id="customColorWrapper">
                     <span>🎨</span>
-                    <input type="color" id="customColorPicker" value="#00e5ff" onchange="onCustomColorPick(this.value)" aria-label="Custom Color Picker">
+                    <input type="color" id="customColorPicker" value="#00e5ff" onchange="onCustomColorPick(this.value)"
+                        aria-label="Custom Color Picker">
                 </div>
             </div>
 
@@ -963,21 +1034,24 @@
             <!-- Brush Size -->
             <div class="slider-group" title="Adjust Brush Width">
                 <span class="size-indicator-dot" id="sizePreviewDot"></span>
-                <input type="range" class="custom-range" id="brushSize" min="2" max="36" value="6" aria-label="Brush Size Slider">
+                <input type="range" class="custom-range" id="brushSize" min="2" max="36" value="6"
+                    aria-label="Brush Size Slider">
                 <span class="slider-label" id="brushSizeLabel">6px</span>
             </div>
 
             <!-- Opacity -->
             <div class="slider-group" title="Adjust Stroke Opacity">
                 <span class="slider-label" style="font-size: 10px;">OP</span>
-                <input type="range" class="custom-range" id="opacity" min="10" max="100" value="100" aria-label="Opacity Slider">
+                <input type="range" class="custom-range" id="opacity" min="10" max="100" value="100"
+                    aria-label="Opacity Slider">
                 <span class="slider-label" id="opacityLabel">100%</span>
             </div>
 
             <div class="separator"></div>
 
             <!-- Background Mode Selector -->
-            <select class="glass-select" id="backgroundSelect" title="Select Canvas Backdrop" onchange="setBackgroundMode(this.value)">
+            <select class="glass-select" id="backgroundSelect" title="Select Canvas Backdrop"
+                onchange="setBackgroundMode(this.value)">
                 <option value="camera">📷 Camera Overlay</option>
                 <option value="dark">🌌 Dark Space</option>
                 <option value="slate">📓 Blackboard</option>
@@ -987,15 +1061,22 @@
             <div class="separator"></div>
 
             <!-- Actions -->
-            <button class="tool-btn" id="undoBtn" title="Undo (Ctrl+Z | 3 Fingers Up)" onclick="undo()" aria-label="Undo">↩️</button>
-            <button class="tool-btn" id="redoBtn" title="Redo (Ctrl+Y or Ctrl+Shift+Z)" onclick="redo()" aria-label="Redo">↪️</button>
-            <button class="tool-btn" id="clearBtn" title="Clear Canvas (Key: C | Rock 🤟 Gesture)" onclick="openClearModal()" aria-label="Clear All">🗑️</button>
-            <button class="tool-btn" id="exportBtn" title="Save / Export Drawing (Ctrl+S | Thumbs Up 👍)" onclick="openExportModal()" aria-label="Export Drawing">💾</button>
-            <button class="tool-btn" id="switchCameraBtn" title="Flip Camera Front/Back (Key: X)" onclick="switchCamera()" aria-label="Flip Camera">🔄</button>
-            <button class="tool-btn" id="toggleSkeletonBtn" title="Toggle Hand Skeleton Wireframe (Key: S)" onclick="toggleSkeleton()" aria-label="Toggle Skeleton">🦴</button>
-            <button class="tool-btn" id="toggleAudioBtn" title="Toggle Sound FX (Key: M)" onclick="toggleAudio()" aria-label="Toggle Audio">🔊</button>
-            <button class="tool-btn" id="shortcutsBtn" title="Keyboard & Gesture Help (Key: ?)" onclick="openShortcutsModal()" aria-label="Help">❓</button>
-            <button class="tool-btn" id="fullscreenBtn" title="Toggle Fullscreen (Key: F)" onclick="toggleFullscreen()" aria-label="Fullscreen">⛶</button>
+            <button class="tool-btn" id="undoBtn" title="Undo (Ctrl+Z | 3 Fingers Up)" onclick="undo()"
+                aria-label="Undo">↩️</button>
+            <button class="tool-btn" id="redoBtn" title="Redo (Ctrl+Y or Ctrl+Shift+Z)" onclick="redo()"
+                aria-label="Redo">↪️</button>
+            <button class="tool-btn" id="clearBtn" title="Clear Canvas (Key: C | Rock 🤟 Gesture)"
+                onclick="openClearModal()" aria-label="Clear All">🗑️</button>
+            <button class="tool-btn" id="exportBtn" title="Save / Export Drawing (Ctrl+S | Thumbs Up 👍)"
+                onclick="openExportModal()" aria-label="Export Drawing">💾</button>
+            <button class="tool-btn" id="toggleSkeletonBtn" title="Toggle Hand Skeleton Wireframe (Key: S)"
+                onclick="toggleSkeleton()" aria-label="Toggle Skeleton">🦴</button>
+            <button class="tool-btn" id="toggleAudioBtn" title="Toggle Sound FX (Key: M)" onclick="toggleAudio()"
+                aria-label="Toggle Audio">🔊</button>
+            <button class="tool-btn" id="shortcutsBtn" title="Keyboard & Gesture Help (Key: ?)"
+                onclick="openShortcutsModal()" aria-label="Help">❓</button>
+            <button class="tool-btn" id="fullscreenBtn" title="Toggle Fullscreen (Key: F)" onclick="toggleFullscreen()"
+                aria-label="Fullscreen">⛶</button>
         </header>
 
         <!-- Mode Indicator -->
@@ -1027,61 +1108,90 @@
                 <span class="hud-val" id="hudFpsVal">0 fps</span>
             </div>
             <div class="hud-row">
-                <span class="hud-label">HAND / SIDE</span>
+                <span class="hud-label">HANDS / SIDE</span>
                 <span class="hud-val" id="hudHandSide">—</span>
             </div>
             <!-- Individual 5-finger state pips: Thumb, Index, Middle, Ring, Pinky -->
-            <div class="finger-monitor" title="5-Finger Real-Time Analyzer (Thumb, Index, Middle, Ring, Pinky)">
-                <div class="finger-item" id="fi0" title="Thumb"><div class="finger-pip" id="fp0"></div><span>THU</span></div>
-                <div class="finger-item" id="fi1" title="Index"><div class="finger-pip" id="fp1"></div><span>IND</span></div>
-                <div class="finger-item" id="fi2" title="Middle"><div class="finger-pip" id="fp2"></div><span>MID</span></div>
-                <div class="finger-item" id="fi3" title="Ring"><div class="finger-pip" id="fp3"></div><span>RNG</span></div>
-                <div class="finger-item" id="fi4" title="Pinky"><div class="finger-pip" id="fp4"></div><span>PIN</span></div>
+            <div class="finger-monitor" id="fingerMonitor"
+                title="5-Finger Real-Time Analyzer (Thumb, Index, Middle, Ring, Pinky)">
+                <div class="finger-item" id="fi0" title="Thumb">
+                    <div class="finger-pip fp-color-0" id="fp0"></div><span>THU</span>
+                </div>
+                <div class="finger-item" id="fi1" title="Index">
+                    <div class="finger-pip fp-color-1" id="fp1"></div><span>IND</span>
+                </div>
+                <div class="finger-item" id="fi2" title="Middle">
+                    <div class="finger-pip fp-color-2" id="fp2"></div><span>MID</span>
+                </div>
+                <div class="finger-item" id="fi3" title="Ring">
+                    <div class="finger-pip fp-color-3" id="fp3"></div><span>RNG</span>
+                </div>
+                <div class="finger-item" id="fi4" title="Pinky">
+                    <div class="finger-pip fp-color-4" id="fp4"></div><span>PIN</span>
+                </div>
             </div>
         </aside>
 
         <!-- Gesture Cheatsheet Card -->
         <aside id="cheatsheetPanel" aria-label="Gesture Controls Guide">
             <div class="cheatsheet-header" onclick="toggleCheatsheet()">
-                <span class="cheatsheet-title">✋ Gesture Controls</span>
+                <span class="cheatsheet-title">✋ Touchless Finger Controls</span>
                 <button class="cheatsheet-toggle" id="cheatsheetToggleBtn" aria-label="Toggle Guide">▾</button>
             </div>
             <div class="gesture-list">
                 <div class="gesture-item" id="gi-point">
                     <span class="gesture-emoji">☝️</span>
-                    <div><strong>Index only</strong><div class="gesture-desc">Draw on screen</div></div>
+                    <div><strong>Index Point</strong>
+                        <div class="gesture-desc">Draw on canvas or aim air cursor</div>
+                    </div>
+                </div>
+                <div class="gesture-item" id="gi-pinch">
+                    <span class="gesture-emoji">🤏</span>
+                    <div><strong>Pinch (Thumb+Index)</strong>
+                        <div class="gesture-desc">Instant Air-Tap click or drag floating panels</div>
+                    </div>
                 </div>
                 <div class="gesture-item" id="gi-peace">
                     <span class="gesture-emoji">✌️</span>
-                    <div><strong>Two fingers</strong><div class="gesture-desc">Move cursor without drawing</div></div>
+                    <div><strong>Two fingers (Peace V)</strong>
+                        <div class="gesture-desc">Move cursor without drawing (Pen Up)</div>
+                    </div>
                 </div>
                 <div class="gesture-item" id="gi-open">
-                    <span class="gesture-emoji">🖐️</span>
-                    <div><strong>Open hand</strong><div class="gesture-desc">Erase drawing</div></div>
+                    <span class="gesture-emoji">✋</span>
+                    <div><strong>Open Hand (Palm)</strong>
+                        <div class="gesture-desc">Palm Eraser mode</div>
+                    </div>
                 </div>
                 <div class="gesture-item" id="gi-fist">
                     <span class="gesture-emoji">✊</span>
-                    <div><strong>Fist</strong><div class="gesture-desc">Pause / Stop</div></div>
-                </div>
-                <div class="gesture-item" id="gi-touch">
-                    <span class="gesture-emoji">👆</span>
-                    <div><strong>Point at Any Option</strong><div class="gesture-desc">Select any button, color, or slider with finger</div></div>
-                </div>
-                <div class="gesture-item" id="gi-pinch">
-                    <span class="gesture-emoji">👌</span>
-                    <div><strong>Pinch</strong><div class="gesture-desc">Pause / Pen up (no draw)</div></div>
-                </div>
-                <div class="gesture-item" id="gi-rock">
-                    <span class="gesture-emoji">🤟</span>
-                    <div><strong>Rock</strong><div class="gesture-desc">Clear canvas</div></div>
-                </div>
-                <div class="gesture-item" id="gi-thumbsup">
-                    <span class="gesture-emoji">👍</span>
-                    <div><strong>Thumbs up</strong><div class="gesture-desc">Quick save</div></div>
+                    <div><strong>Fist</strong>
+                        <div class="gesture-desc">Pause / Rest hand safely</div>
+                    </div>
                 </div>
                 <div class="gesture-item" id="gi-three">
                     <span class="gesture-emoji">3️⃣</span>
-                    <div><strong>Three fingers</strong><div class="gesture-desc">Undo stroke</div></div>
+                    <div><strong>Three fingers up</strong>
+                        <div class="gesture-desc">Instant Undo</div>
+                    </div>
+                </div>
+                <div class="gesture-item" id="gi-four">
+                    <span class="gesture-emoji">4️⃣</span>
+                    <div><strong>Four fingers up</strong>
+                        <div class="gesture-desc">Instant Redo</div>
+                    </div>
+                </div>
+                <div class="gesture-item" id="gi-thumbsup">
+                    <span class="gesture-emoji">👍</span>
+                    <div><strong>Thumbs up</strong>
+                        <div class="gesture-desc">Open Save & Export modal</div>
+                    </div>
+                </div>
+                <div class="gesture-item" id="gi-rock">
+                    <span class="gesture-emoji">🤟</span>
+                    <div><strong>Rock</strong>
+                        <div class="gesture-desc">Clear canvas (hold 1.5s)</div>
+                    </div>
                 </div>
             </div>
         </aside>
@@ -1106,8 +1216,10 @@
         <h2 id="clearModalTitle" class="dialog-title">🗑️ Clear Canvas?</h2>
         <p class="dialog-body">This will wipe all active drawing strokes. You can undo this with ↩️ if needed.</p>
         <div class="dialog-actions">
-            <button type="button" class="btn-modern btn-modern-ghost" onclick="document.getElementById('clearModal').close()">Cancel</button>
-            <button type="button" class="btn-modern btn-modern-danger" onclick="confirmClearAction()">Yes, Clear All</button>
+            <button type="button" class="btn-modern btn-modern-ghost"
+                onclick="document.getElementById('clearModal').close()">Cancel</button>
+            <button type="button" class="btn-modern btn-modern-danger" onclick="confirmClearAction()">Yes, Clear
+                All</button>
         </div>
     </dialog>
 
@@ -1116,21 +1228,25 @@
         <h2 id="exportModalTitle" class="dialog-title">💾 Export Artwork</h2>
         <p class="dialog-body">Choose your desired export style:</p>
         <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
-            <button type="button" class="btn-modern btn-modern-ghost" style="text-align: left; padding: 12px 18px;" onclick="executeExport('dark')">
+            <button type="button" class="btn-modern btn-modern-ghost" style="text-align: left; padding: 12px 18px;"
+                onclick="executeExport('dark')">
                 <strong>🌌 Dark Space Background (.png)</strong><br>
                 <small style="color: var(--text-muted)">High-contrast dark canvas showcasing neon stroke glows</small>
             </button>
-            <button type="button" class="btn-modern btn-modern-ghost" style="text-align: left; padding: 12px 18px;" onclick="executeExport('transparent')">
+            <button type="button" class="btn-modern btn-modern-ghost" style="text-align: left; padding: 12px 18px;"
+                onclick="executeExport('transparent')">
                 <strong>✨ Transparent PNG (.png)</strong><br>
                 <small style="color: var(--text-muted)">Isolated strokes for graphic design & overlays</small>
             </button>
-            <button type="button" class="btn-modern btn-modern-ghost" style="text-align: left; padding: 12px 18px;" onclick="executeExport('camera')">
+            <button type="button" class="btn-modern btn-modern-ghost" style="text-align: left; padding: 12px 18px;"
+                onclick="executeExport('camera')">
                 <strong>📷 Webcam Freezeframe + Artwork</strong><br>
                 <small style="color: var(--text-muted)">Combines current video backdrop with your air drawing</small>
             </button>
         </div>
         <div class="dialog-actions">
-            <button type="button" class="btn-modern btn-modern-ghost" onclick="document.getElementById('exportModal').close()">Close</button>
+            <button type="button" class="btn-modern btn-modern-ghost"
+                onclick="document.getElementById('exportModal').close()">Close</button>
         </div>
     </dialog>
 
@@ -1139,26 +1255,39 @@
         <h2 id="shortcutsModalTitle" class="dialog-title">⌨️ Keyboard & Gesture Cheatsheet</h2>
         <div class="dialog-body" style="max-height: 60vh; overflow-y: auto; padding-right: 6px;">
             <div class="shortcuts-grid">
-                <div><span class="key-badge">P</span></div><div>Pen Mode (Index Finger)</div>
-                <div><span class="key-badge">H</span></div><div>Highlighter Mode</div>
-                <div><span class="key-badge">L</span></div><div>Laser Pointer Mode (Fading Beam)</div>
-                <div><span class="key-badge">E</span></div><div>Eraser Mode (Open Hand)</div>
-                <div><span class="key-badge">R</span></div><div>Toggle Rainbow Neon Mode</div>
-                <div><span class="key-badge">S</span></div><div>Toggle Hand Skeleton Wireframe</div>
-                <div><span class="key-badge">1 – 8</span></div><div>Quick Select Neon Preset Colors</div>
-                <div><span class="key-badge">Ctrl + Z</span></div><div>Undo Stroke (Three Fingers Up)</div>
-                <div><span class="key-badge">Ctrl + Y</span></div><div>Redo Stroke</div>
-                <div><span class="key-badge">C</span></div><div>Clear Canvas (Rock Gesture 🤟)</div>
-                <div><span class="key-badge">Ctrl + S</span></div><div>Save / Export (Thumbs Up 👍)</div>
-                <div><span class="key-badge">M</span></div><div>Mute / Unmute Audio Sound FX</div>
-                <div><span class="key-badge">F</span></div><div>Toggle Fullscreen</div>
+                <div><span class="key-badge">P</span></div>
+                <div>Pen Mode (Index Finger)</div>
+                <div><span class="key-badge">H</span></div>
+                <div>Highlighter Mode</div>
+                <div><span class="key-badge">L</span></div>
+                <div>Laser Pointer Mode (Fading Beam)</div>
+                <div><span class="key-badge">E</span></div>
+                <div>Eraser Mode (Open Hand)</div>
+                <div><span class="key-badge">R</span></div>
+                <div>Toggle Rainbow Neon Mode</div>
+                <div><span class="key-badge">S</span></div>
+                <div>Toggle Hand Skeleton Wireframe</div>
+                <div><span class="key-badge">1 – 8</span></div>
+                <div>Quick Select Neon Preset Colors</div>
+                <div><span class="key-badge">Pinch</span></div>
+                <div>Instant Air-Tap Click & Drag Floating Panels</div>
+                <div><span class="key-badge">Ctrl + Z</span></div>
+                <div><span class="key-badge">Ctrl + Y</span></div>
+                <div><span class="key-badge">C</span></div>
+                <div>Clear Canvas (Rock Gesture 🤟)</div>
+                <div><span class="key-badge">Ctrl + S</span></div>
+                <div><span class="key-badge">M</span></div>
+                <div>Mute / Unmute Audio Sound FX</div>
+                <div><span class="key-badge">F</span></div>
+                <div>Toggle Fullscreen</div>
             </div>
             <p style="font-size: 11px; color: var(--accent-cyan); margin-top: 10px;">
                 💡 <em>Note: Drawing works simultaneously with your webcam or using your mouse/trackpad!</em>
             </p>
         </div>
         <div class="dialog-actions">
-            <button type="button" class="btn-modern btn-modern-primary" onclick="document.getElementById('shortcutsModal').close()">Got it!</button>
+            <button type="button" class="btn-modern btn-modern-primary"
+                onclick="document.getElementById('shortcutsModal').close()">Got it!</button>
         </div>
     </dialog>
 
@@ -1166,14 +1295,14 @@
         // ==================== CONFIGURATION & CONSTANTS ====================
         const CONFIG = {
             smoothingFactor: 0.35,
-            minPointDistance: 2.8,
+            minPointDistance: 1.5,
             eraserRadius: 40,
             maxHistory: 25,
             glowIntensity: 1.0,
             laserDecayMs: 1100,
             stabilizationFrames: 3,
             gestureVotesRequired: 2,
-            pinchThresholdRatio: 0.26,
+            pinchThresholdRatio: 0.22,
             rockCooldownFrames: 60,
             saveCooldownFrames: 60,
             undoCooldownFrames: 24
@@ -1186,7 +1315,7 @@
 
         // ==================== APPLICATION STATE ====================
         const state = {
-            currentTool: 'pen', // 'pen' | 'highlighter' | 'laser' | 'eraser'
+            currentTool: 'pen', // 'pen' | 'highlighter' | 'laser' | 'eraser' | 'letter'
             currentColor: '#ff3355',
             rainbowMode: false,
             rainbowHue: 0,
@@ -1195,6 +1324,10 @@
             backgroundMode: 'camera', // 'camera' | 'dark' | 'slate' | 'white'
             showSkeleton: true,
             isDrawing: false,
+            isAirDragging: false,
+            airDragPanel: null,
+            airDragOffset: { x: 0, y: 0 },
+            pinchCooldown: 0,
             lastPoint: null,
             history: [],
             historyIndex: -1,
@@ -1295,7 +1428,7 @@
                         });
                         break;
                 }
-            } catch (e) {}
+            } catch (e) { }
         }
 
         function toggleAudio() {
@@ -1411,8 +1544,9 @@
             const ledEl = document.getElementById('modeLed');
             if (textEl) textEl.textContent = conf.label;
             if (ledEl) {
-                ledEl.style.background = conf.color;
-                ledEl.style.boxShadow = `0 0 10px ${conf.color}`;
+                const c = conf.color;
+                ledEl.style.background = c;
+                ledEl.style.boxShadow = `0 0 10px ${c}`;
             }
 
             playSound('click');
@@ -1545,9 +1679,9 @@
 
         function toggleFullscreen() {
             if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(() => {});
+                document.documentElement.requestFullscreen().catch(() => { });
             } else {
-                document.exitFullscreen().catch(() => {});
+                document.exitFullscreen().catch(() => { });
             }
             playSound('click');
         }
@@ -1663,18 +1797,125 @@
             };
         }
 
+        // ==================== ULTRA-ACCURATE ONE-EURO SPATIAL FILTER ====================
+        class LowPassFilter {
+            constructor(initVal = 0.0) {
+                this.s = initVal;
+                this.initialized = false;
+            }
+            filter(value, alpha) {
+                if (!this.initialized) {
+                    this.s = value;
+                    this.initialized = true;
+                    return value;
+                }
+                this.s = alpha * value + (1.0 - alpha) * this.s;
+                return this.s;
+            }
+            reset() {
+                this.initialized = false;
+            }
+        }
+
+        class OneEuroFilter {
+            constructor(minCutoff = 1.0, beta = 0.008, dCutoff = 1.0) {
+                this.minCutoff = minCutoff;
+                this.beta = beta;
+                this.dCutoff = dCutoff;
+                this.xFilter = new LowPassFilter();
+                this.yFilter = new LowPassFilter();
+                this.dxFilter = new LowPassFilter();
+                this.dyFilter = new LowPassFilter();
+                this.lastTime = null;
+            }
+            alpha(rate, cutoff) {
+                const tau = 1.0 / (2 * Math.PI * cutoff);
+                const te = 1.0 / rate;
+                return 1.0 / (1.0 + tau / te);
+            }
+            filter(x, y, timestamp = performance.now()) {
+                if (this.lastTime === null) {
+                    this.lastTime = timestamp;
+                    this.xFilter.filter(x, 1.0);
+                    this.yFilter.filter(y, 1.0);
+                    return { x, y, speed: 0 };
+                }
+                const dt = Math.max((timestamp - this.lastTime) / 1000.0, 0.001);
+                this.lastTime = timestamp;
+                const rate = 1.0 / dt;
+
+                const dx = (x - this.xFilter.s) * rate;
+                const dy = (y - this.yFilter.s) * rate;
+                const edx = this.dxFilter.filter(dx, this.alpha(rate, this.dCutoff));
+                const edy = this.dyFilter.filter(dy, this.alpha(rate, this.dCutoff));
+                const speed = Math.hypot(edx, edy);
+
+                const cutoff = this.minCutoff + this.beta * speed;
+                const a = this.alpha(rate, cutoff);
+
+                const filteredX = this.xFilter.filter(x, a);
+                const filteredY = this.yFilter.filter(y, a);
+                return { x: filteredX, y: filteredY, speed };
+            }
+            reset() {
+                this.xFilter.reset();
+                this.yFilter.reset();
+                this.dxFilter.reset();
+                this.dyFilter.reset();
+                this.lastTime = null;
+            }
+        }
+
+        const FINGERTIP_INDICES = [4, 8, 12, 16, 20]; // Thumb, Index, Middle, Ring, Pinky
+        const FINGER_NAMES = ['Thumb', 'Index', 'Middle', 'Ring', 'Pinky'];
+
+        const handTrackers = [
+            {
+                filters: FINGERTIP_INDICES.map(() => new OneEuroFilter(1.2, 0.025, 1.0)),
+                lastPoints: [null, null, null, null, null],
+                isDrawing: [false, false, false, false, false],
+                activeStrokes: [[], [], [], [], []],
+                gestureVotes: [],
+                stableGesture: 'none',
+                isPinching: false,
+                pinchPoint: null
+            },
+            {
+                filters: FINGERTIP_INDICES.map(() => new OneEuroFilter(1.2, 0.025, 1.0)),
+                lastPoints: [null, null, null, null, null],
+                isDrawing: [false, false, false, false, false],
+                activeStrokes: [[], [], [], [], []],
+                gestureVotes: [],
+                stableGesture: 'none',
+                isPinching: false,
+                pinchPoint: null
+            }
+        ];
+
         // ==================== GESTURE CLASSIFIER ====================
-        // ==================== GESTURE CLASSIFIER ====================
-        // Aspect-ratio corrected 3D Euclidean metric (invariant to camera aspect ratio & orientation)
-        function dist3D(p1, p2) {
+        // Aspect-ratio normalized 2D Euclidean metric (invariant to video aspect ratio & resolution)
+        function dist2D(p1, p2) {
             const aspect = (video && video.videoHeight > 0) ? (video.videoWidth / video.videoHeight) : (16 / 9);
             const dx = p1.x - p2.x;
             const dy = (p1.y - p2.y) / aspect;
-            const dz = (p1.z !== undefined && p2.z !== undefined) ? (p1.z - p2.z) : 0;
-            return Math.hypot(dx, dy, dz);
+            return Math.hypot(dx, dy);
         }
 
-        // Checks whether a finger is extended using 4-joint segment perimeter vs direct chord ratio and knuckle distances
+        // Direction cosine between 3 joints (a -> b and b -> c).
+        // Scale, rotation, and translation invariant.
+        // Returns ~1.0 when straight, <= 0.1 when folded.
+        function cosineAngle(a, b, c) {
+            const aspect = (video && video.videoHeight > 0) ? (video.videoWidth / video.videoHeight) : (16 / 9);
+            const v1x = b.x - a.x;
+            const v1y = (b.y - a.y) / aspect;
+            const v2x = c.x - b.x;
+            const v2y = (c.y - b.y) / aspect;
+            const m1 = Math.hypot(v1x, v1y) || 0.0001;
+            const m2 = Math.hypot(v2x, v2y) || 0.0001;
+            return (v1x * v2x + v1y * v2y) / (m1 * m2);
+        }
+
+        // 100% Reliable Invariant Finger Extension Analyzer
         function isFingerExtended(mcpIdx, pipIdx, dipIdx, tipIdx, landmarks) {
             const wrist = landmarks[0];
             const mcp = landmarks[mcpIdx];
@@ -1682,27 +1923,25 @@
             const dip = landmarks[dipIdx];
             const tip = landmarks[tipIdx];
 
-            const l1 = dist3D(mcp, pip);
-            const l2 = dist3D(pip, dip);
-            const l3 = dist3D(dip, tip);
-            const perimeter = l1 + l2 + l3 || 0.001;
-            const chord = dist3D(mcp, tip);
-            const extensionRatio = chord / perimeter;
+            // 1. Joint alignment angle at PIP: straight (> 0.25) vs bent backwards/into palm (< 0)
+            const cosPIP = cosineAngle(mcp, pip, tip);
 
-            const tipToMcp = dist3D(tip, mcp);
-            const pipToMcp = dist3D(pip, mcp);
-            const tipToWrist = dist3D(tip, wrist);
-            const pipToWrist = dist3D(pip, wrist);
+            // 2. Relative distances from base knuckle (MCP) and wrist
+            const dTipMcp = dist2D(tip, mcp);
+            const dPipMcp = dist2D(pip, mcp);
+            const dTipWrist = dist2D(tip, wrist);
+            const dPipWrist = dist2D(pip, wrist);
 
-            // An extended finger forms a straight line (ratio > 0.68) and tip is farther from base & wrist than PIP
-            const ratioOk = extensionRatio > 0.68;
-            const mcpDistOk = tipToMcp > pipToMcp * 1.10;
-            const wristDistOk = tipToWrist > pipToWrist * 1.02;
+            // 3. Segment extension perimeter vs direct chord ratio
+            const perimeter = dist2D(mcp, pip) + dist2D(pip, dip) + dist2D(dip, tip) || 0.001;
+            const chord = dist2D(mcp, tip);
+            const ratio = chord / perimeter;
 
-            return ratioOk && mcpDistOk && wristDistOk;
+            // Invariant multi-criteria check
+            return (cosPIP > 0.25 && dTipMcp > dPipMcp * 1.02 && dTipWrist > dPipWrist * 0.96 && ratio > 0.58);
         }
 
-        // Checks whether the thumb is extended away from palm (abducted) vs folded against fingers
+        // 100% Invariant Thumb Extension Analyzer
         function isThumbExtended(landmarks) {
             const wrist = landmarks[0];
             const thumbMcp = landmarks[2];
@@ -1710,20 +1949,40 @@
             const thumbTip = landmarks[4];
             const indexMcp = landmarks[5];
             const pinkyMcp = landmarks[17];
+            const middleMcp = landmarks[9];
 
-            const handScale = dist3D(landmarks[9], wrist) || 0.2;
-            const thumbPerimeter = dist3D(thumbMcp, thumbIp) + dist3D(thumbIp, thumbTip);
-            const thumbChord = dist3D(thumbMcp, thumbTip);
-            const thumbRatio = thumbChord / (thumbPerimeter || 0.001);
+            const handScale = dist2D(middleMcp, wrist) || 0.2;
 
-            const distTipToIndexMcp = dist3D(thumbTip, indexMcp) / handScale;
-            const distTipToPinkyMcp = dist3D(thumbTip, pinkyMcp);
-            const distMcpToPinkyMcp = dist3D(thumbMcp, pinkyMcp);
+            // Angle of thumb IP joint
+            const cosThumb = cosineAngle(thumbMcp, thumbIp, thumbTip);
 
-            // Thumb is extended when straight and abducted away from index knuckle and palm
-            return (thumbRatio > 0.72) &&
-                   (distTipToIndexMcp > 0.35) &&
-                   (distTipToPinkyMcp > distMcpToPinkyMcp * 1.04);
+            // Tip distance to index knuckle
+            const distTipToIndex = dist2D(thumbTip, indexMcp) / handScale;
+
+            // Tip distance to pinky knuckle vs MCP distance
+            const distTipToPinky = dist2D(thumbTip, pinkyMcp);
+            const distMcpToPinky = dist2D(thumbMcp, pinkyMcp);
+
+            // Perimeter ratio
+            const perimeter = dist2D(thumbMcp, thumbIp) + dist2D(thumbIp, thumbTip) || 0.001;
+            const chord = dist2D(thumbMcp, thumbTip);
+            const ratio = chord / perimeter;
+
+            return (cosThumb > 0.35 && ratio > 0.60 && distTipToIndex > 0.24 && distTipToPinky > distMcpToPinky * 0.95);
+        }
+
+        function checkHandPinch(landmarks) {
+            const wrist = landmarks[0];
+            const handScale = dist2D(landmarks[9], wrist) || 0.2;
+            const thumbTip = landmarks[4];
+            const indexTip = landmarks[8];
+            const distNormalized = dist2D(thumbTip, indexTip) / handScale;
+
+            const pThumb = videoToScreenCoords(thumbTip.x, thumbTip.y);
+            const pIndex = videoToScreenCoords(indexTip.x, indexTip.y);
+            const screenDist = Math.hypot(pThumb.x - pIndex.x, pThumb.y - pIndex.y);
+
+            return (distNormalized < 0.22 || screenDist < 36);
         }
 
         function getFingerStates(landmarks) {
@@ -1740,15 +1999,39 @@
         function classifyGesture(fingerStates, landmarks) {
             const [thumb, index, middle, ring, pinky] = fingerStates;
             const wrist = landmarks[0];
-            const handScale = dist3D(landmarks[9], wrist) || 0.2;
+            const isPinching = checkHandPinch(landmarks);
 
-            // 1. Open Hand / Erase: ALL 4 main fingers (Index, Middle, Ring, Pinky) are extended
-            // (Strict check: pointing with index finger will never accidentally trigger erase!)
+            // 1. Pinch: Thumb + Index touching (Instant Air-Tap / Grab)
+            if (isPinching) {
+                return 'pinch';
+            }
+
+            // 2. Clear canvas: Rock gesture (Index + Pinky extended, Middle + Ring curled)
+            if (index && pinky && !middle && !ring) {
+                return 'rock';
+            }
+
+            // 3. Open Hand: Palm Eraser (all 4 main fingers extended)
             if (index && middle && ring && pinky) {
                 return 'open';
             }
 
-            // 2. Fist / Pause: All 4 main fingers curled
+            // 4. Redo: Four fingers extended (Index, Middle, Ring, Pinky), Thumb folded
+            if (!thumb && index && middle && ring && pinky) {
+                return 'four';
+            }
+
+            // 5. Undo: Three fingers (Index, Middle, Ring), Pinky curled
+            if (index && middle && ring && !pinky) {
+                return 'three';
+            }
+
+            // 6. Navigate / Hover: Peace Sign (Index + Middle extended, Ring + Pinky curled)
+            if (index && middle && !ring && !pinky) {
+                return 'peace';
+            }
+
+            // 7. Fist / Pause / Thumbs up: All 4 main fingers curled
             if (!index && !middle && !ring && !pinky) {
                 if (thumb && landmarks[4].y < landmarks[2].y - 0.04) {
                     return 'thumbsup';
@@ -1756,50 +2039,12 @@
                 return 'fist';
             }
 
-            // 3. Rock: Index + Pinky extended, Middle + Ring curled
-            if (index && pinky && !middle && !ring) {
-                return 'rock';
-            }
-
-            // 4. Three: Index + Middle + Ring extended, Pinky curled
-            if (index && middle && ring && !pinky) {
-                return 'three';
-            }
-
-            // 5. True Pinch: thumb tip and index tip physically touching & index finger curled/bent
-            const pinchDist = dist3D(landmarks[4], landmarks[8]) / handScale;
-            const indexPerimeter = dist3D(landmarks[5], landmarks[6]) + dist3D(landmarks[6], landmarks[7]) + dist3D(landmarks[7], landmarks[8]);
-            const indexChord = dist3D(landmarks[5], landmarks[8]);
-            const indexRatio = indexChord / (indexPerimeter || 0.001);
-
-            if (pinchDist < 0.16 && indexRatio < 0.72) {
-                return 'pinch';
-            }
-
-            // 6. Peace (Navigate / Move Cursor without drawing) vs Point (Draw)
-            if (index && middle && !ring && !pinky) {
-                const indexReach = dist3D(landmarks[8], wrist);
-                const middleReach = dist3D(landmarks[12], wrist);
-                const reachDiff = Math.abs(indexReach - middleReach) / handScale;
-
-                const middlePerimeter = dist3D(landmarks[9], landmarks[10]) + dist3D(landmarks[10], landmarks[11]) + dist3D(landmarks[11], landmarks[12]);
-                const middleChord = dist3D(landmarks[9], landmarks[12]);
-                const middleRatio = middleChord / (middlePerimeter || 0.001);
-
-                // Both fingers extended evenly alongside each other -> Peace
-                if (reachDiff < 0.20 && middleRatio > 0.76) {
-                    return 'peace';
-                }
-                // If middle finger is trailing or partially curled -> User is pointing!
-                return 'point';
-            }
-
-            // 7. Thumbs up isolated
+            // 8. Isolated Thumbs Up
             if (thumb && !index && !middle && !ring && !pinky) {
                 return 'thumbsup';
             }
 
-            // 8. PRIMARY GESTURE: Point / Draw whenever index finger is extended
+            // 9. PRIMARY DRAWING GESTURE: Index Point (Only Index finger extended!)
             if (index) {
                 return 'point';
             }
@@ -1807,15 +2052,16 @@
             return 'fist';
         }
 
-        function stabilizeGesture(raw) {
-            state.gestureVoteHistory.push(raw);
-            if (state.gestureVoteHistory.length > 3) {
-                state.gestureVoteHistory.shift();
+        function stabilizeGesture(raw, hIdx = 0) {
+            const tracker = handTrackers[hIdx] || handTrackers[0];
+            tracker.gestureVotes.push(raw);
+            if (tracker.gestureVotes.length > 3) {
+                tracker.gestureVotes.shift();
             }
             const votes = {};
-            state.gestureVoteHistory.forEach(g => { votes[g] = (votes[g] || 0) + 1; });
+            tracker.gestureVotes.forEach(g => { votes[g] = (votes[g] || 0) + 1; });
 
-            let top = state.stableGesture;
+            let top = tracker.stableGesture;
             let maxVotes = 0;
             for (const [g, count] of Object.entries(votes)) {
                 if (count > maxVotes) {
@@ -1824,59 +2070,33 @@
                 }
             }
             if (maxVotes >= 2) {
-                state.stableGesture = top;
+                tracker.stableGesture = top;
             }
-            return state.stableGesture;
+            state.stableGesture = tracker.stableGesture;
+            return tracker.stableGesture;
         }
 
         function resetSmoothing() {
+            handTrackers.forEach(t => {
+                t.filters.forEach(f => f.reset());
+                t.lastPoints = [null, null, null, null, null];
+                t.isDrawing = [false, false, false, false, false];
+                t.activeStrokes = [[], [], [], [], []];
+                t.gestureVotes = [];
+                t.stableGesture = 'none';
+                t.isPinching = false;
+                t.pinchPoint = null;
+            });
             state.pointBuffer = [];
             state.hasActiveTrack = false;
             state.lastPoint = null;
         }
 
         function smoothPoint(x, y) {
-            if (typeof x !== 'number' || isNaN(x) || !isFinite(x)) x = state.smoothedPoint.x || 0;
-            if (typeof y !== 'number' || isNaN(y) || !isFinite(y)) y = state.smoothedPoint.y || 0;
-
-            if (!state.hasActiveTrack || isNaN(state.smoothedPoint.x) || isNaN(state.smoothedPoint.y)) {
-                // Initial hand lock: snap immediately with 0ms drag
-                state.smoothedPoint = { x, y };
-                state.pointBuffer = [{ x, y }];
-                state.hasActiveTrack = true;
-                return { x, y };
-            }
-
-            const dx = x - state.smoothedPoint.x;
-            const dy = y - state.smoothedPoint.y;
-            const dist = Math.hypot(dx, dy);
-
-            // Fast motion or sudden shift: snap to eliminate drag/stuck feel
-            if (dist > 65 || isNaN(dist)) {
-                state.smoothedPoint = { x, y };
-                state.pointBuffer = [{ x, y }];
-                return { x, y };
-            }
-
-            state.pointBuffer.push({ x, y });
-            if (state.pointBuffer.length > CONFIG.stabilizationFrames) {
-                state.pointBuffer.shift();
-            }
-
-            let sumX = 0, sumY = 0;
-            for (let i = 0; i < state.pointBuffer.length; i++) {
-                sumX += state.pointBuffer[i].x;
-                sumY += state.pointBuffer[i].y;
-            }
-            const avgX = sumX / state.pointBuffer.length;
-            const avgY = sumY / state.pointBuffer.length;
-
-            // Adaptive smoothing: very responsive when moving, silky smooth when steady
-            const factor = dist > 25 ? 0.18 : CONFIG.smoothingFactor;
-            state.smoothedPoint.x = state.smoothedPoint.x * factor + avgX * (1 - factor);
-            state.smoothedPoint.y = state.smoothedPoint.y * factor + avgY * (1 - factor);
-
-            return { x: state.smoothedPoint.x, y: state.smoothedPoint.y };
+            // Uses Hand 0 Index Finger's One-Euro Filter for silky smooth sub-pixel tracking
+            const filterRes = handTrackers[0].filters[1].filter(x, y);
+            state.smoothedPoint = { x: filterRes.x, y: filterRes.y };
+            return state.smoothedPoint;
         }
 
         // ==================== RENDERING PIPELINE ====================
@@ -1920,9 +2140,6 @@
                 drawCtx.lineWidth = size;
                 drawCtx.beginPath();
                 drawCtx.moveTo(x1, y1);
-                const midX = (x1 + x2) / 2;
-                const midY = (y1 + y2) / 2;
-                drawCtx.quadraticCurveTo(x1, y1, midX, midY);
                 drawCtx.lineTo(x2, y2);
                 drawCtx.stroke();
             }
@@ -1975,119 +2192,196 @@
             }
         }
 
-        function renderUIOverlay(landmarks, cursorX, cursorY, gesture, dwellProgress = 0) {
+        function renderUIOverlay(multiHandData, touchStatus) {
             uiCtx.clearRect(0, 0, uiCanvas.width, uiCanvas.height);
 
-            // Draw hand skeleton if enabled
-            if (landmarks && state.showSkeleton) {
+            if (!multiHandData || multiHandData.length === 0) return;
+
+            const w = window.innerWidth;
+            const now = performance.now();
+
+            // 1. Draw hand skeleton(s) for up to 2 hands
+            if (state.showSkeleton) {
                 const connections = [
-                    [0,1],[1,2],[2,3],[3,4],
-                    [0,5],[5,6],[6,7],[7,8],
-                    [0,9],[9,10],[10,11],[11,12],
-                    [0,13],[13,14],[14,15],[15,16],
-                    [0,17],[17,18],[18,19],[19,20],
-                    [5,9],[9,13],[13,17]
+                    [0, 1], [1, 2], [2, 3], [3, 4],
+                    [0, 5], [5, 6], [6, 7], [7, 8],
+                    [0, 9], [9, 10], [10, 11], [11, 12],
+                    [0, 13], [13, 14], [14, 15], [15, 16],
+                    [0, 17], [17, 18], [18, 19], [19, 20],
+                    [5, 9], [9, 13], [13, 17]
                 ];
 
-                const screenPts = landmarks.map(lm => videoToScreenCoords(lm.x, lm.y));
+                multiHandData.forEach(({ landmarks, hIdx, fingerStates }) => {
+                    const screenPts = landmarks.map(lm => videoToScreenCoords(lm.x, lm.y));
+                    const boneColor = hIdx === 0 ? 'rgba(0, 229, 255, 0.55)' : 'rgba(255, 0, 127, 0.55)';
+                    const jointColor = hIdx === 0 ? 'rgba(0, 229, 255, 0.85)' : 'rgba(255, 0, 127, 0.85)';
 
-                uiCtx.save();
-                uiCtx.strokeStyle = 'rgba(0, 229, 255, 0.55)';
-                uiCtx.lineWidth = 2.5;
+                    uiCtx.save();
+                    uiCtx.strokeStyle = boneColor;
+                    uiCtx.lineWidth = 2.4;
 
-                connections.forEach(([i, j]) => {
-                    const p1 = screenPts[i];
-                    const p2 = screenPts[j];
-                    uiCtx.beginPath();
-                    uiCtx.moveTo(p1.x, p1.y);
-                    uiCtx.lineTo(p2.x, p2.y);
-                    uiCtx.stroke();
+                    connections.forEach(([i, j]) => {
+                        const p1 = screenPts[i];
+                        const p2 = screenPts[j];
+                        uiCtx.beginPath();
+                        uiCtx.moveTo(p1.x, p1.y);
+                        uiCtx.lineTo(p2.x, p2.y);
+                        uiCtx.stroke();
+                    });
+
+                    screenPts.forEach((pt, idx) => {
+                        const tipPosition = FINGERTIP_INDICES.indexOf(idx);
+                        if (tipPosition !== -1) {
+                            const isExtended = fingerStates[tipPosition];
+                            const tipColor = (hIdx === 0 ? "#00e5ff" : "#ffe600");
+
+                            // Outer halo
+                            uiCtx.fillStyle = isExtended ? tipColor : 'rgba(255, 255, 255, 0.2)';
+                            uiCtx.globalAlpha = isExtended ? 0.45 : 0.2;
+                            uiCtx.beginPath();
+                            uiCtx.arc(pt.x, pt.y, isExtended ? 9 : 6, 0, Math.PI * 2);
+                            uiCtx.fill();
+
+                            // Core tip
+                            uiCtx.globalAlpha = 0.95;
+                            uiCtx.beginPath();
+                            uiCtx.arc(pt.x, pt.y, isExtended ? 5 : 3.5, 0, Math.PI * 2);
+                            uiCtx.fill();
+                            uiCtx.globalAlpha = 1.0;
+                        } else {
+                            uiCtx.fillStyle = jointColor;
+                            uiCtx.beginPath();
+                            uiCtx.arc(pt.x, pt.y, 3, 0, Math.PI * 2);
+                            uiCtx.fill();
+                        }
+                    });
+                    uiCtx.restore();
                 });
+            }
+            // 2. Single-Finger Precision Cursor (Index Fingertip)
+                // Single-Finger Precision Cursor (Hand 0 Index)
+                const h0 = multiHandData[0];
+                if (h0) {
+                    const cursorX = h0.cursorX;
+                    const cursorY = h0.cursorY;
+                    const isErase = state.currentTool === 'eraser' || h0.gesture === 'open';
 
-                screenPts.forEach((pt, idx) => {
-                    const isTip = [4, 8, 12, 16, 20].includes(idx);
-                    if (isTip) {
-                        // Glowing outer ring dot
-                        uiCtx.fillStyle = 'rgba(255, 71, 87, 0.35)';
+                    uiCtx.save();
+                    if (isErase) {
+                        uiCtx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+                        uiCtx.lineWidth = 2;
+                        uiCtx.setLineDash([4, 4]);
                         uiCtx.beginPath();
-                        uiCtx.arc(pt.x, pt.y, 8, 0, Math.PI * 2);
-                        uiCtx.fill();
-
-                        // Solid inner tip dot
-                        uiCtx.fillStyle = 'rgba(255, 71, 87, 0.95)';
-                        uiCtx.beginPath();
-                        uiCtx.arc(pt.x, pt.y, 4.8, 0, Math.PI * 2);
+                        uiCtx.arc(cursorX, cursorY, CONFIG.eraserRadius, 0, Math.PI * 2);
+                        uiCtx.stroke();
+                        uiCtx.fillStyle = 'rgba(255, 51, 85, 0.12)';
                         uiCtx.fill();
                     } else {
-                        uiCtx.fillStyle = 'rgba(0, 229, 255, 0.85)';
+                        const sz = state.brushSize;
+                        const c = state.rainbowMode ? `hsl(${state.rainbowHue}, 100%, 55%)` : state.currentColor;
+                        const ringColor = state.isDrawing ? c : 'rgba(255, 255, 255, 0.75)';
+
+                        uiCtx.strokeStyle = ringColor;
+                        uiCtx.lineWidth = 2;
                         uiCtx.beginPath();
-                        uiCtx.arc(pt.x, pt.y, 3.5, 0, Math.PI * 2);
+                        uiCtx.arc(cursorX, cursorY, sz + 6, 0, Math.PI * 2);
+                        uiCtx.stroke();
+
+                        uiCtx.fillStyle = c;
+                        uiCtx.beginPath();
+                        uiCtx.arc(cursorX, cursorY, Math.max(sz / 2, 2.5), 0, Math.PI * 2);
                         uiCtx.fill();
+
+                        if (state.isDrawing) {
+                            uiCtx.strokeStyle = c;
+                            uiCtx.globalAlpha = 0.4;
+                            uiCtx.lineWidth = 5;
+                            uiCtx.beginPath();
+                            uiCtx.arc(cursorX, cursorY, sz + 8, 0, Math.PI * 2);
+                            uiCtx.stroke();
+                        }
                     }
-                });
+                    uiCtx.restore();
+                }
+
+            // 3. Apple Vision Pro Style Magnetic Pinch Visual
+            multiHandData.forEach(({ landmarks, isPinching }) => {
+                const thumbTip = videoToScreenCoords(landmarks[4].x, landmarks[4].y);
+                const indexTip = videoToScreenCoords(landmarks[8].x, landmarks[8].y);
+                const pinchDist = Math.hypot(thumbTip.x - indexTip.x, thumbTip.y - indexTip.y);
+
+                if (pinchDist < 60) {
+                    uiCtx.save();
+                    const pinchProgress = Math.max(0, 1 - (pinchDist / 60));
+                    uiCtx.strokeStyle = isPinching ? 'rgba(0, 240, 118, 0.95)' : `rgba(0, 229, 255, ${0.4 + pinchProgress * 0.5})`;
+                    uiCtx.lineWidth = isPinching ? 3.5 : (1.5 + pinchProgress * 2);
+                    uiCtx.beginPath();
+                    uiCtx.moveTo(thumbTip.x, thumbTip.y);
+                    uiCtx.lineTo(indexTip.x, indexTip.y);
+                    uiCtx.stroke();
+
+                    const midX = (thumbTip.x + indexTip.x) / 2;
+                    const midY = (thumbTip.y + indexTip.y) / 2;
+
+                    uiCtx.fillStyle = isPinching ? '#00f076' : 'var(--accent-cyan)';
+                    uiCtx.beginPath();
+                    uiCtx.arc(midX, midY, isPinching ? 6 : (3 + pinchProgress * 3), 0, Math.PI * 2);
+                    uiCtx.fill();
+
+                    if (isPinching) {
+                        uiCtx.strokeStyle = 'rgba(0, 240, 118, 0.6)';
+                        uiCtx.lineWidth = 2;
+                        uiCtx.beginPath();
+                        uiCtx.arc(midX, midY, 14, 0, Math.PI * 2);
+                        uiCtx.stroke();
+                    }
+                    uiCtx.restore();
+                }
+            });
+
+            // 4. Air-Touch Dwell Progress Ring
+            if (touchStatus && touchStatus.inZone && touchStatus.progress > 0) {
+                const primaryX = multiHandData[0]?.cursorX || 0;
+                const primaryY = multiHandData[0]?.cursorY || 0;
+                const startAngle = -Math.PI / 2;
+                const endAngle = startAngle + (touchStatus.progress * Math.PI * 2);
+
+                uiCtx.save();
+                uiCtx.strokeStyle = 'rgba(0, 229, 255, 0.35)';
+                uiCtx.lineWidth = 7;
+                uiCtx.beginPath();
+                uiCtx.arc(primaryX, primaryY, 22, startAngle, endAngle);
+                uiCtx.stroke();
+
+                uiCtx.strokeStyle = 'rgba(0, 229, 255, 0.95)';
+                uiCtx.lineWidth = 3.5;
+                uiCtx.lineCap = 'round';
+                uiCtx.beginPath();
+                uiCtx.arc(primaryX, primaryY, 22, startAngle, endAngle);
+                uiCtx.stroke();
                 uiCtx.restore();
             }
 
-            // Draw cursor reticle
-            if (cursorX !== undefined && cursorY !== undefined) {
+            // 5. Air Drag Tether for floating panels
+            if (state.isAirDragging && state.airDragPanel && multiHandData[0]) {
+                const fingerX = multiHandData[0].cursorX;
+                const fingerY = multiHandData[0].cursorY;
+                const pRect = state.airDragPanel.getBoundingClientRect();
+                const pCenterX = state.facingMode === 'user' ? (w - (pRect.left + pRect.width / 2)) : (pRect.left + pRect.width / 2);
+                const pCenterY = pRect.top + 20;
+
                 uiCtx.save();
-                const isErase = state.currentTool === 'eraser' || gesture === 'open';
+                uiCtx.strokeStyle = 'rgba(0, 229, 255, 0.65)';
+                uiCtx.lineWidth = 2;
+                uiCtx.setLineDash([5, 5]);
+                uiCtx.beginPath();
+                uiCtx.moveTo(fingerX, fingerY);
+                uiCtx.lineTo(pCenterX, pCenterY);
+                uiCtx.stroke();
 
-                if (isErase) {
-                    uiCtx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
-                    uiCtx.lineWidth = 2;
-                    uiCtx.setLineDash([4, 4]);
-                    uiCtx.beginPath();
-                    uiCtx.arc(cursorX, cursorY, CONFIG.eraserRadius, 0, Math.PI * 2);
-                    uiCtx.stroke();
-                    uiCtx.fillStyle = 'rgba(255, 51, 85, 0.12)';
-                    uiCtx.fill();
-                } else {
-                    const sz = state.brushSize;
-                    const c = state.rainbowMode ? `hsl(${state.rainbowHue}, 100%, 55%)` : state.currentColor;
-                    const ringColor = state.isDrawing ? c : 'rgba(255, 255, 255, 0.75)';
-
-                    uiCtx.strokeStyle = ringColor;
-                    uiCtx.lineWidth = 2;
-                    uiCtx.beginPath();
-                    uiCtx.arc(cursorX, cursorY, sz + 6, 0, Math.PI * 2);
-                    uiCtx.stroke();
-
-                    uiCtx.fillStyle = c;
-                    uiCtx.beginPath();
-                    uiCtx.arc(cursorX, cursorY, Math.max(sz / 2, 2.5), 0, Math.PI * 2);
-                    uiCtx.fill();
-
-                    if (state.isDrawing) {
-                        uiCtx.strokeStyle = c;
-                        uiCtx.globalAlpha = 0.4;
-                        uiCtx.lineWidth = 5;
-                        uiCtx.beginPath();
-                        uiCtx.arc(cursorX, cursorY, sz + 8, 0, Math.PI * 2);
-                        uiCtx.stroke();
-                        uiCtx.globalAlpha = 1.0;
-                    }
-                }
-
-                // Dwell Progress Ring when hovering over toolbar buttons with finger
-                if (dwellProgress > 0) {
-                    const startAngle = -Math.PI / 2;
-                    const endAngle = startAngle + (dwellProgress * Math.PI * 2);
-
-                    uiCtx.strokeStyle = 'rgba(0, 229, 255, 0.35)';
-                    uiCtx.lineWidth = 7;
-                    uiCtx.beginPath();
-                    uiCtx.arc(cursorX, cursorY, 22, startAngle, endAngle);
-                    uiCtx.stroke();
-
-                    uiCtx.strokeStyle = 'rgba(0, 229, 255, 0.95)';
-                    uiCtx.lineWidth = 3.5;
-                    uiCtx.lineCap = 'round';
-                    uiCtx.beginPath();
-                    uiCtx.arc(cursorX, cursorY, 22, startAngle, endAngle);
-                    uiCtx.stroke();
-                }
-
+                uiCtx.fillStyle = 'rgba(0, 229, 255, 0.9)';
+                uiCtx.font = '700 11px var(--font-mono)';
+                uiCtx.fillText('✊ MOVING PANEL', fingerX + 15, fingerY - 10);
                 uiCtx.restore();
             }
         }
@@ -2102,7 +2396,7 @@
             // 1. If any modal dialog is currently open, focus targets strictly to the modal
             const openDialog = document.querySelector('dialog[open]');
             if (openDialog) {
-                return Array.from(openDialog.querySelectorAll('button, [role="button"], a')).filter(el => {
+                return Array.from(openDialog.querySelectorAll('button, [role="button"], a, input, select')).filter(el => {
                     const rect = el.getBoundingClientRect();
                     return rect.width > 0 && rect.height > 0;
                 });
@@ -2117,23 +2411,68 @@
             });
         }
 
-        function checkScreenFingerTouch(point) {
+        function triggerAirClick(element) {
+            if (element.tagName === 'SELECT') {
+                const nextIdx = (element.selectedIndex + 1) % element.options.length;
+                element.selectedIndex = nextIdx;
+                setBackgroundMode(element.value);
+                playSound('click');
+                showToast(`Backdrop: ${element.options[nextIdx].text}`);
+            } else {
+                element.click();
+                playSound('color');
+            }
+
+            element.style.transform = 'scale(1.22)';
+            element.style.boxShadow = '0 0 25px var(--accent-cyan)';
+            setTimeout(() => {
+                if (element) {
+                    element.style.transform = '';
+                    element.style.boxShadow = '';
+                }
+            }, 260);
+        }
+
+        function checkScreenFingerTouch(point, isPinch = false) {
             const w = window.innerWidth;
             // Visual screen coordinates of user's finger on mirrored display
             const fingerScreenX = state.facingMode === 'user' ? (w - point.x) : point.x;
             const fingerScreenY = point.y;
 
+            // Handle ongoing air-drag of floating panels (Letter Studio or Cheatsheet)
+            if (state.isAirDragging && state.airDragPanel) {
+                if (isPinch || hoveredButton) {
+                    const panel = state.airDragPanel;
+                    const rect = panel.getBoundingClientRect();
+                    const newLeft = Math.max(10, Math.min(window.innerWidth - rect.width - 10, fingerScreenX - state.airDragOffset.x));
+                    const newTop = Math.max(10, Math.min(window.innerHeight - rect.height - 10, fingerScreenY - state.airDragOffset.y));
+                    panel.style.left = `${newLeft}px`;
+                    panel.style.top = `${newTop}px`;
+                    panel.style.bottom = 'auto';
+                    panel.style.right = 'auto';
+                    return { inZone: true, progress: 1, button: panel, isDragging: true };
+                } else {
+                    // Released drag
+                    if (state.airDragPanel) {
+                        state.airDragPanel.classList.remove('air-dragging');
+                    }
+                    state.isAirDragging = false;
+                    state.airDragPanel = null;
+                }
+            }
+
             const targets = getScreenInteractiveTargets();
             let found = null;
             let isSlider = false;
+            let isHeader = false;
 
             for (let i = 0; i < targets.length; i++) {
                 const el = targets[i];
                 const rect = el.getBoundingClientRect();
 
                 // Ergonomic hit-padding so finger pointing is effortless anywhere on screen
-                const padX = (el.tagName === 'INPUT' && el.type === 'range') ? 8 : 12;
-                const padY = (el.tagName === 'INPUT' && el.type === 'range') ? 16 : 12;
+                const padX = (el.tagName === 'INPUT' && el.type === 'range') ? 10 : 14;
+                const padY = (el.tagName === 'INPUT' && el.type === 'range') ? 18 : 14;
 
                 if (
                     fingerScreenX >= rect.left - padX &&
@@ -2143,6 +2482,7 @@
                 ) {
                     found = el;
                     isSlider = (el.tagName === 'INPUT' && el.type === 'range');
+                    isHeader = el.classList.contains('cheatsheet-header');
                     break;
                 }
             }
@@ -2150,7 +2490,22 @@
             const now = performance.now();
 
             if (found) {
-                // Mid-Air Slider Scrubbing (Brush size, Opacity)
+                // Mid-Air Panel Header Dragging with Pinch
+                if (isHeader) {
+                    const panel = found.closest('#cheatsheetPanel');
+                    if (panel && isPinch && !state.isAirDragging) {
+                        state.isAirDragging = true;
+                        state.airDragPanel = panel;
+                        const pRect = panel.getBoundingClientRect();
+                        state.airDragOffset = { x: fingerScreenX - pRect.left, y: fingerScreenY - pRect.top };
+                        panel.classList.add('air-dragging');
+                        playSound('click');
+                        showToast('✊ Moving Panel with Finger...');
+                        return { inZone: true, progress: 1, button: panel, isDragging: true };
+                    }
+                }
+
+                // Mid-Air Slider Scrubbing (Brush size, Opacity, Guidelines)
                 if (isSlider) {
                     if (hoveredButton && hoveredButton !== found) {
                         hoveredButton.classList.remove('air-hover');
@@ -2167,11 +2522,21 @@
                     if (found.value != val) {
                         found.value = val;
                         found.dispatchEvent(new Event('input', { bubbles: true }));
+                        found.dispatchEvent(new Event('change', { bubbles: true }));
                     }
                     return { inZone: true, progress: 1, button: found };
                 }
 
-                // Buttons, Color Swatches, Dropdowns, Dialog Actions
+                // Instant Pinch-to-Click (Air Tap)
+                if (isPinch) {
+                    if (lastSelectedBtn !== found) {
+                        lastSelectedBtn = found;
+                        triggerAirClick(found);
+                    }
+                    return { inZone: true, progress: 1, button: found, pinched: true };
+                }
+
+                // Dwell Selection Fallback (250ms hold)
                 if (hoveredButton !== found) {
                     if (hoveredButton) {
                         hoveredButton.classList.remove('air-hover');
@@ -2186,35 +2551,18 @@
 
                 if (progress >= 1 && lastSelectedBtn !== found) {
                     lastSelectedBtn = found;
-
-                    if (found.tagName === 'SELECT') {
-                        // Cycle through select options
-                        const nextIdx = (found.selectedIndex + 1) % found.options.length;
-                        found.selectedIndex = nextIdx;
-                        setBackgroundMode(found.value);
-                        playSound('click');
-                        showToast(`Backdrop: ${found.options[nextIdx].text}`);
-                    } else {
-                        // Standard button click
-                        found.click();
-                        playSound('color');
-                    }
-
-                    // Visual selection pulse
-                    found.style.transform = 'scale(1.22)';
-                    found.style.boxShadow = '0 0 25px var(--accent-cyan)';
-                    setTimeout(() => {
-                        if (found) {
-                            found.style.transform = '';
-                            found.style.boxShadow = '';
-                        }
-                    }, 260);
+                    triggerAirClick(found);
                 }
 
                 return { inZone: true, progress, button: found };
             }
 
-            // Finger in open drawing canvas
+            // Finger in open air
+            if (state.isAirDragging && state.airDragPanel && !isPinch) {
+                state.airDragPanel.classList.remove('air-dragging');
+                state.isAirDragging = false;
+                state.airDragPanel = null;
+            }
             if (hoveredButton) {
                 hoveredButton.classList.remove('air-hover');
                 hoveredButton = null;
@@ -2246,20 +2594,29 @@
 
             switch (gesture) {
                 case 'point': // DRAW
+                    state.strokeDropGrace = 0;
                     processStroke(point);
                     break;
-                case 'peace': // HOVER / MOVE CURSOR
+                case 'peace': // HOVER / MOVE CURSOR (PEN UP)
                     stopStroke();
                     break;
-                case 'open': // ERASE
+                case 'open': // PALM ERASE
+                    stopStroke();
                     state.isDrawing = true;
                     eraseAt(point.x, point.y, CONFIG.eraserRadius);
                     state.lastPoint = { ...point };
                     break;
-                case 'fist': // STOP / PAUSE
-                    stopStroke();
+                case 'fist': // STOP / PAUSE (with micro-glitch grace period for continuous strokes)
+                    if (state.isDrawing) {
+                        state.strokeDropGrace = (state.strokeDropGrace || 0) + 1;
+                        if (state.strokeDropGrace >= 2) {
+                            stopStroke();
+                        }
+                    } else {
+                        stopStroke();
+                    }
                     break;
-                case 'pinch': // PAUSE / PEN UP (NO AUTOMATIC COLOR CYCLING!)
+                case 'pinch': // PAUSE / AIR TAP
                     stopStroke();
                     break;
                 case 'rock': // CLEAR
@@ -2273,7 +2630,7 @@
                 case 'thumbsup': // SAVE
                     stopStroke();
                     if (state.gestureCooldown === 0) {
-                        executeExport('dark');
+                        openExportModal();
                         state.gestureCooldown = CONFIG.saveCooldownFrames;
                     }
                     break;
@@ -2281,6 +2638,13 @@
                     stopStroke();
                     if (state.gestureCooldown === 0) {
                         undo();
+                        state.gestureCooldown = CONFIG.undoCooldownFrames;
+                    }
+                    break;
+                case 'four': // REDO
+                    stopStroke();
+                    if (state.gestureCooldown === 0) {
+                        redo();
                         state.gestureCooldown = CONFIG.undoCooldownFrames;
                     }
                     break;
@@ -2325,7 +2689,17 @@
             if (!state.isDrawing) {
                 state.isDrawing = true;
                 state.lastPoint = { ...point };
-                state.strokePointCount = 0;
+                state.strokePointCount = 1;
+                // Render immediate start dot for instant tactile responsiveness
+                const isHighlighter = state.currentTool === 'highlighter';
+                drawStroke(
+                    point.x, point.y,
+                    point.x + 0.1, point.y + 0.1,
+                    strokeColor,
+                    state.brushSize,
+                    state.opacity,
+                    isHighlighter
+                );
                 return;
             }
 
@@ -2376,61 +2750,96 @@
         function onHandResults(results) {
             try {
                 updateFps();
+                const now = performance.now();
 
                 if (results && results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
-                    const landmarks = results.multiHandLandmarks[0];
-                    if (!landmarks || landmarks.length < 21) {
-                        return;
-                    }
-                    for (let i = 0; i < 21; i++) {
-                        if (!landmarks[i] || typeof landmarks[i].x !== 'number' || isNaN(landmarks[i].x)) {
-                            return;
-                        }
-                    }
-
-                    let handedness = 'Right';
-                    if (results.multiHandedness && results.multiHandedness.length > 0) {
-                        const h = results.multiHandedness[0];
-                        handedness = h.label || h.categoryName || 'Right';
-                    }
-
                     state.handDetected = true;
+                    const numHands = results.multiHandLandmarks.length;
+
                     const dot = document.getElementById('hudStatusDot');
                     if (dot) dot.className = 'hud-status-dot active';
                     const st = document.getElementById('hudStatusText');
-                    if (st) st.textContent = 'Hand Locked ✓';
-                    const hs = document.getElementById('hudHandSide');
-                    if (hs) hs.textContent = `${handedness} Hand`;
+                    if (st) st.textContent = `${numHands} Hand${numHands > 1 ? 's' : ''} Locked ✓`;
 
-                    // Finger tracking monitor
-                    state.fingerStates = getFingerStates(landmarks);
-                    state.fingerStates.forEach((isUp, idx) => {
-                        const pip = document.getElementById(`fp${idx}`);
-                        if (pip) pip.classList.toggle('up', isUp);
-                        const item = document.getElementById(`fi${idx}`);
-                        if (item) item.classList.toggle('active', isUp);
+                    // Handedness labels
+                    let handLabels = [];
+                    if (results.multiHandedness && results.multiHandedness.length > 0) {
+                        handLabels = results.multiHandedness.map(h => h.label || h.categoryName || 'Right');
+                    } else {
+                        handLabels = ['Right'];
+                    }
+                    const hs = document.getElementById('hudHandSide');
+                    if (hs) hs.textContent = numHands > 1 ? 'Both Hands (2x)' : `${handLabels[0]} Hand`;
+
+                    // Process multi-hand tracking data
+                    const multiHandData = [];
+
+                    results.multiHandLandmarks.forEach((landmarks, hIdx) => {
+                        if (hIdx > 1 || !landmarks || landmarks.length < 21) return;
+
+                        const fingerStates = getFingerStates(landmarks);
+                        const isPinching = checkHandPinch(landmarks);
+                        const tracker = handTrackers[hIdx];
+                        tracker.isPinching = isPinching;
+
+                        // Filter index fingertip with 1-Euro Filter
+                        const rawIndex = videoToScreenCoords(landmarks[8].x, landmarks[8].y);
+                        const filteredIndex = tracker.filters[1].filter(rawIndex.x, rawIndex.y, now);
+
+                        const rawThumb = videoToScreenCoords(landmarks[4].x, landmarks[4].y);
+                        const filteredThumb = tracker.filters[0].filter(rawThumb.x, rawThumb.y, now);
+                        tracker.pinchPoint = {
+                            x: (filteredIndex.x + filteredThumb.x) / 2,
+                            y: (filteredIndex.y + filteredThumb.y) / 2
+                        };
+
+                        const rawGesture = classifyGesture(fingerStates, landmarks);
+                        const stable = stabilizeGesture(rawGesture, hIdx);
+
+                        multiHandData.push({
+                            landmarks,
+                            hIdx,
+                            fingerStates,
+                            isPinching,
+                            tracker,
+                            cursorX: filteredIndex.x,
+                            cursorY: filteredIndex.y,
+                            gesture: stable
+                        });
                     });
 
-                    // Gesture classification
-                    const rawGesture = classifyGesture(state.fingerStates, landmarks);
-                    state.currentGesture = stabilizeGesture(rawGesture);
-                    const gVal = document.getElementById('hudGestureVal');
-                    if (gVal) gVal.textContent = getGestureLabel(state.currentGesture);
+                    // Update Hand 0 Finger Monitor & Gesture HUD
+                    if (multiHandData[0]) {
+                        state.fingerStates = multiHandData[0].fingerStates;
+                        state.currentGesture = multiHandData[0].gesture;
 
-                    // Precise coordinate translation matching object-fit: cover
-                    const indexScreen = videoToScreenCoords(landmarks[8].x, landmarks[8].y);
-                    const smoothed = smoothPoint(indexScreen.x, indexScreen.y);
+                        state.fingerStates.forEach((isUp, idx) => {
+                            const pip = document.getElementById(`fp${idx}`);
+                            if (pip) pip.classList.toggle('up', isUp);
+                            const item = document.getElementById(`fi${idx}`);
+                            if (item) item.classList.toggle('active', isUp);
+                        });
 
-                    // Air-touch universal screen interaction (Select any option/button on screen with finger)
-                    const touchStatus = checkScreenFingerTouch(smoothed);
+                        const gVal = document.getElementById('hudGestureVal');
+                        if (gVal) gVal.textContent = getGestureLabel(state.currentGesture);
+                    }
+
+                    // Hand 0 primary pointer for air-touch screen interaction
+                    const primary = multiHandData[0];
+                    const primaryPoint = { x: primary.cursorX, y: primary.cursorY };
+                    const touchStatus = checkScreenFingerTouch(primaryPoint, primary.isPinching);
 
                     if (touchStatus.inZone) {
                         stopStroke();
-                        renderUIOverlay(landmarks, smoothed.x, smoothed.y, 'hover', touchStatus.progress);
+                        handTrackers.forEach(t => {
+                            t.isDrawing = [false, false, false, false, false];
+                            t.lastPoints = [null, null, null, null, null];
+                        });
                     } else {
-                        handleGestureActions(state.currentGesture, smoothed);
-                        renderUIOverlay(landmarks, smoothed.x, smoothed.y, state.currentGesture, 0);
+                        handleGestureActions(primary.gesture, primaryPoint);
                     }
+
+                    renderUIOverlay(multiHandData, touchStatus);
                 } else {
                     state.handDetected = false;
                     resetSmoothing();
@@ -2461,7 +2870,7 @@
                     }
 
                     stopStroke();
-                    renderUIOverlay(null, undefined, undefined, 'none', 0);
+                    renderUIOverlay([], null);
                 }
             } catch (frameErr) {
                 console.warn('onHandResults safe catch:', frameErr);
@@ -2470,14 +2879,15 @@
 
         function getGestureLabel(g) {
             const labels = {
-                'point': '☝️ Drawing',
-                'peace': '✌️ Navigate',
-                'open': '🖐️ Erasing',
+                'point': '☝️ Precision Draw',
+                'peace': '✌️ Navigate / Pen Up',
+                'open': '✋ Erasing',
                 'fist': '✊ Paused',
-                'pinch': '👌 Pen Up',
-                'rock': '🤟 Clear',
-                'thumbsup': '👍 Save',
+                'pinch': '🤏 Pinch Air-Tap',
+                'rock': '🤟 Clear All',
+                'thumbsup': '👍 Save / Export',
                 'three': '3️⃣ Undo',
+                'four': '4️⃣ Redo',
                 'unknown': '❓ Searching',
                 'none': 'None'
             };
@@ -2622,8 +3032,9 @@
             async function cameraInferenceLoop() {
                 if (video && !video.paused && !video.ended && video.readyState >= 2) {
                     const currentVidTime = video.currentTime;
-                    // Only process when video has produced a new frame and not already busy
-                    if (currentVidTime !== lastProcessedVideoTime && !isProcessingFrame && hands) {
+                    const elapsedSinceLast = performance.now() - lastFrameProcessingStart;
+                    // Process whenever camera produces a new frame or >= 28ms has elapsed, avoiding frame starvation
+                    if ((currentVidTime !== lastProcessedVideoTime || elapsedSinceLast >= 28) && !isProcessingFrame && hands) {
                         lastProcessedVideoTime = currentVidTime;
                         isProcessingFrame = true;
                         lastFrameProcessingStart = performance.now();
@@ -2733,7 +3144,6 @@
                 case 'c': openClearModal(); break;
                 case 'm': toggleAudio(); break;
                 case 'f': toggleFullscreen(); break;
-                case 'x': switchCamera(); break;
                 case '?': openShortcutsModal(); break;
                 case '1': setColor(PALETTE[0]); break;
                 case '2': setColor(PALETTE[1]); break;
@@ -2757,7 +3167,7 @@
                 });
 
                 hands.setOptions({
-                    maxNumHands: 1,
+                    maxNumHands: 2,
                     modelComplexity: 1,
                     minDetectionConfidence: 0.5,
                     minTrackingConfidence: 0.5
@@ -2795,4 +3205,5 @@
         }
     </script>
 </body>
+
 </html>
