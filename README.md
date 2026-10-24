@@ -38,7 +38,8 @@ npm run sync
 | **Undo** | 3️⃣ Three fingers (Index + Middle + Ring) | Reverts the last stroke |
 | **Redo** | 4️⃣ Four fingers (Thumb folded, 4 fingers extended) | Re-applies the last undone stroke |
 | **Clear Canvas** | 🤟 Rock (Index + Pinky extended) | Clears active strokes from the canvas |
-| **Quick Save** | 👍 Thumbs Up | Exports current drawing to PNG |
+| **Quick Save** | 👍 Thumbs Up | Saves current drawing to browser storage |
+| **Download** | 📥 Download button / Key `D` | Downloads artwork as PNG (Dark, Transparent, or Camera) |
 | **Pause / Pen Up** | ✊ Fist | Lifts pen / pauses drawing |
 
 ---
@@ -82,7 +83,8 @@ You can operate every element of AirDraw Pro **exclusively using your fingers in
 | `Ctrl + Z` / `Cmd + Z` | Undo last stroke |
 | `Ctrl + Y` / `Cmd + Shift + Z` | Redo stroke |
 | `C` | Open Clear Confirmation Modal |
-| `Ctrl + S` / `Cmd + S` | Open Export Modal (Transparent, Dark, or Camera Snapshot) |
+| `Ctrl + S` / `Cmd + S` | Save drawing to browser storage |
+| `D` | Open Download Image Modal (Transparent, Dark, or Camera Snapshot) |
 | `M` | Mute / Unmute Sci-Fi Synthesizer Sound Effects |
 | `F` | Toggle Fullscreen |
 | `?` | Open Gesture & Keyboard Help Cheatsheet |
