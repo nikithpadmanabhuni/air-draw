@@ -56,7 +56,7 @@ function syncToGitHub() {
 
         // 2. Identify changed files
         const changedLines = status.split('\n').filter(Boolean);
-        const changedFiles = changedLines.map(l => l.slice(2).trim());
+        const changedFiles = changedLines.map(l => l.replace(/^..\s+/, '').trim());
         const summary = changedFiles.slice(0, 3).join(', ') + (changedFiles.length > 3 ? ` (+${changedFiles.length - 3} more)` : '');
 
         const timestamp = new Date().toLocaleString();
