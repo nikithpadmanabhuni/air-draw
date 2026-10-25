@@ -6,7 +6,8 @@
     "start": "npx serve -l 3000 .",
     "dev": "npx serve -l 3000 .",
     "sync": "node auto-sync.js",
-    "sync:extensions": "node scripts/sync-extensions.js"
+    "sync:extensions": "node scripts/sync-extensions.js",
+    "security:check": "bash scripts/security-audit.sh"
   },
   "keywords": [
     "mediapipe",

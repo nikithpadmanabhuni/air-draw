@@ -1,7 +1,40 @@
+# Dependencies
 node_modules/
+
+# Secrets, Credentials & Environment Files
+.env
+.env.*
+*.env
+*.pem
+*.key
+*.pkcs12
+*.pfx
+*.p12
+*.token
+*.secret
+credentials.json
+client_secret*.json
+id_rsa*
+id_ed25519*
+user-data.json
+
+# Process, Logs & Runtime State
 cloudflare.log
 cloudflare.pid
 auto-sync.log
+*.log
+*.pid
+
+# Temporary Files & Editor Swaps
 *.tmp
+*.swp
+*~
+.vscode-test/
+
+# OS Artifacts
 .DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
 

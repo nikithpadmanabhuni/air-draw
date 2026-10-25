@@ -22,13 +22,44 @@ const IGNORED_PATTERNS = [
     /\.tmp$/,
     /~$/,
     /\.swp$/,
-    /auto-sync\.log$/
+    /auto-sync\.log$/,
+    /\.env($|\.)/i,
+    /\.(key|pem|pkcs12|pfx|p12|cert|crt|token|secret)$/i,
+    /id_rsa/i,
+    /id_ed25519/i,
+    /credentials\.json$/i,
+    /client_secret.*\.json$/i,
+    /user-data\.json$/i,
+    /cloudflare\.(log|pid)$/
+];
+
+const SECRET_PATTERNS = [
+    /-----BEGIN (?:RSA |EC |OPENSSH |DSA |PGP |)PRIVATE KEY-----/,
+    /AKIA[0-9A-Z]{16}/,
+    /gh[pousr]_[0-9a-zA-Z]{36}/,
+    /sk-[a-zA-Z0-9]{20,}/,
+    /AIza[0-9A-Za-z\-_]{35}/,
+    /xox[baprs]-[0-9a-zA-Z]{10,}/,
+    /(?:password|passwd|secret|api_key|apikey)\s*[:=]\s*['"][^'"]{8,}['"]/i
 ];
 
 function isIgnored(filepath) {
     if (!filepath) return true;
     const normalized = filepath.replace(/\\/g, '/');
     return IGNORED_PATTERNS.some(pattern => pattern.test(normalized));
+}
+
+function containsSecret(filepath) {
+    try {
+        const fullPath = path.resolve(REPO_DIR, filepath);
+        if (!fs.existsSync(fullPath)) return false;
+        const stat = fs.statSync(fullPath);
+        if (stat.isDirectory() || stat.size > 2 * 1024 * 1024) return false; // skip huge files
+        const content = fs.readFileSync(fullPath, 'utf8');
+        return SECRET_PATTERNS.some(regex => regex.test(content));
+    } catch (e) {
+        return false;
+    }
 }
 
 function runGit(cmd) {
@@ -57,6 +88,21 @@ function syncToGitHub() {
         // 2. Identify changed files
         const changedLines = status.split('\n').filter(Boolean);
         const changedFiles = changedLines.map(l => l.replace(/^..\s+/, '').trim());
+
+        // Pre-commit security scan
+        for (const file of changedFiles) {
+            if (isIgnored(file)) {
+                console.warn(`[Auto-Sync] ⚠️ Skipping ignored/sensitive file: ${file}`);
+                continue;
+            }
+            if (containsSecret(file)) {
+                console.error(`[Auto-Sync] 🚨 SECURITY ALERT: Potential secret or credential pattern detected in ${file}! Sync aborted.`);
+                isSyncing = false;
+                pendingChanges.clear();
+                return;
+            }
+        }
+
         const summary = changedFiles.slice(0, 3).join(', ') + (changedFiles.length > 3 ? ` (+${changedFiles.length - 3} more)` : '');
 
         const timestamp = new Date().toLocaleString();
