@@ -1,0 +1,25 @@
+========================================================================
+ ✨ AIRDRAW PRO — LIVE ACCESS LINKS FOR MOBILE & DESKTOP
+========================================================================
+
+🌍 GLOBAL PUBLIC HTTPS LINK (iPhone, Android, Tablets, PC worldwide):
+https://pizza-agents-reveal-transparency.trycloudflare.com
+
+📱 LOCAL WI-FI LINK (Devices on the same local network):
+http://192.168.0.121:3000
+
+💻 LOCAL COMPUTER:
+http://localhost:3000
+
+📦 GITHUB REPOSITORY:
+https://github.com/nikithpadmanabhuni/air-draw
+
+🚀 GITHUB PAGES:
+https://nikithpadmanabhuni.github.io/air-draw/
+
+------------------------------------------------------------------------
+📸 Camera & Drawing Notes:
+- Modern web browsers require HTTPS for camera access (getUserMedia).
+- The Global Public HTTPS link works directly on iOS Safari, Android Chrome,
+  Mac, Windows, and Linux with full webcam permissions and single-finger drawing!
+========================================================================
