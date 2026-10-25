@@ -74,18 +74,39 @@ function syncToGitHub() {
     }
 
     isSyncing = true;
+    const timestamp = new Date().toLocaleString();
 
     try {
         // 1. Check if git working directory has modifications
         const status = runGit('git status --porcelain');
-        if (!status) {
-            console.log('[Auto-Sync] ℹ️ No pending changes detected.');
+        
+        // 2. Check for unpushed commits
+        let unpushedCount = 0;
+        try {
+            const revOutput = runGit('git rev-list @{u}..HEAD --count');
+            unpushedCount = parseInt(revOutput, 10) || 0;
+        } catch (e) {
+            // upstream tracking branch might be unset
+        }
+
+        if (!status && unpushedCount === 0) {
+            console.log(`[Auto-Sync] ℹ️ Everything up-to-date with GitHub (${timestamp}).`);
             isSyncing = false;
             pendingChanges.clear();
             return;
         }
 
-        // 2. Identify changed files
+        if (!status && unpushedCount > 0) {
+            console.log(`[Auto-Sync] 🚀 Pushing ${unpushedCount} unpushed commit(s) to GitHub (origin main)...`);
+            const pushResult = runGit('git push origin main');
+            console.log(`[Auto-Sync] ✅ Successfully pushed unpushed commit(s) to GitHub at ${timestamp}!`);
+            if (pushResult) console.log(`[Auto-Sync] Output: ${pushResult}`);
+            isSyncing = false;
+            pendingChanges.clear();
+            return;
+        }
+
+        // 3. Identify changed files
         const changedLines = status.split('\n').filter(Boolean);
         const changedFiles = changedLines.map(l => l.replace(/^..\s+/, '').trim());
 
@@ -104,18 +125,16 @@ function syncToGitHub() {
         }
 
         const summary = changedFiles.slice(0, 3).join(', ') + (changedFiles.length > 3 ? ` (+${changedFiles.length - 3} more)` : '');
-
-        const timestamp = new Date().toLocaleString();
         const commitMsg = `auto-sync: update ${summary} (${timestamp})`;
 
         console.log(`[Auto-Sync] 🔄 Changes detected in: ${summary}`);
         console.log(`[Auto-Sync] 📦 Staging and committing...`);
 
-        // 3. Stage & Commit
+        // 4. Stage & Commit
         runGit('git add -A');
         runGit(`git commit -m "${commitMsg.replace(/"/g, '\\"')}"`);
 
-        // 4. Push to remote
+        // 5. Push to remote
         console.log(`[Auto-Sync] 🚀 Pushing to GitHub (origin main)...`);
         const pushResult = runGit('git push origin main');
 
@@ -145,23 +164,30 @@ function onFileEvent(eventType, filename) {
     }, DEBOUNCE_DELAY_MS);
 }
 
-// Start watching repository directory
-console.log('====================================================');
-console.log(' ✨ AirDraw Pro — GitHub Auto-Sync Active');
-console.log(` 📂 Watching workspace: ${REPO_DIR}`);
-console.log(` 🎯 Remote: https://github.com/nikithpadmanabhuni/air-draw.git`);
-console.log(` ⏱️ Debounce interval: ${DEBOUNCE_DELAY_MS}ms`);
-console.log('====================================================');
+module.exports = { syncToGitHub, runGit, REPO_DIR };
 
-// Perform initial check on launch
-syncToGitHub();
+// CLI Execution Mode
+if (require.main === module) {
+    const isOnce = process.argv.includes('--once');
 
-try {
-    fs.watch(REPO_DIR, { recursive: true }, onFileEvent);
-} catch (watchErr) {
-    console.warn('[Auto-Sync] Warning: fs.watch recursive failed, falling back to interval check:', watchErr.message);
-    setInterval(syncToGitHub, 10000);
+    console.log('====================================================');
+    console.log(' ✨ AirDraw Pro — GitHub Auto-Sync Engine');
+    console.log(` 📂 Workspace: ${REPO_DIR}`);
+    console.log(` 🎯 Remote: https://github.com/nikithpadmanabhuni/air-draw.git`);
+    console.log(` ⏱️ Mode: ${isOnce ? 'One-time sync' : `Watching (Debounce: ${DEBOUNCE_DELAY_MS}ms)`}`);
+    console.log('====================================================');
+
+    syncToGitHub();
+
+    if (!isOnce) {
+        try {
+            fs.watch(REPO_DIR, { recursive: true }, onFileEvent);
+        } catch (watchErr) {
+            console.warn('[Auto-Sync] Warning: fs.watch recursive failed, falling back to interval check:', watchErr.message);
+            setInterval(syncToGitHub, 10000);
+        }
+
+        // Keep process alive
+        process.stdin.resume();
+    }
 }
-
-// Keep process alive
-process.stdin.resume();
