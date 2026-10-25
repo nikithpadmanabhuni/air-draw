@@ -1,27 +1,63 @@
 # ✨ AirDraw Pro — Advanced Contactless AI Air Drawing System
 
+[![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-Live_Web_App-blue?style=for-the-badge&logo=github)](https://nikithpadmanabhuni.github.io/air-draw/)
+[![Live Tunnel](https://img.shields.io/badge/Live_Tunnel-Cloudflare_HTTPS-brightgreen?style=for-the-badge&logo=cloudflare)](https://furthermore-transform-timer-boost.trycloudflare.com)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-nikithpadmanabhuni%2Fair--draw-181717?style=for-the-badge&logo=github)](https://github.com/nikithpadmanabhuni/air-draw)
+[![Security Audit](https://img.shields.io/badge/Security_Audit-Passed-success?style=for-the-badge&logo=shield)](scripts/security-audit.sh)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
+
 AirDraw Pro transforms your webcam into an interactive spatial drawing tablet using **Google MediaPipe Hands** for real-time 21-landmark 3D hand tracking, gesture classification, and buttery-smooth stroke synthesis.
+
+---
+
+## 🌐 Live Links & Global Access
+
+Access AirDraw Pro on any device anywhere in the world:
+
+| Access Method | URL / Link | Target Devices | Notes |
+| :--- | :--- | :--- | :--- |
+| **🌍 Global Public HTTPS** | **[furthermore-transform-timer-boost.trycloudflare.com](https://furthermore-transform-timer-boost.trycloudflare.com)** | iPhone, Android, iPad, PC | Full HTTPS webcam permissions worldwide |
+| **🚀 GitHub Pages 24/7** | **[nikithpadmanabhuni.github.io/air-draw](https://nikithpadmanabhuni.github.io/air-draw/)** | Any modern browser | Deployed automatically on every commit |
+| **📱 Local Wi-Fi (LAN)** | **`http://192.168.0.121:3000`** | Phones & laptops on Wi-Fi | Zero latency on local network |
+| **💻 Local Machine** | **[http://localhost:3000](http://localhost:3000)** | Development workstation | Direct local server |
+| **📦 GitHub Repository** | **[github.com/nikithpadmanabhuni/air-draw](https://github.com/nikithpadmanabhuni/air-draw)** | Source code & releases | Main branch with auto-sync |
 
 ---
 
 ## 🚀 Quick Start
 
-### Run with Local Web Server
-Because modern web browsers restrict webcam access (`getUserMedia`) to **Secure Contexts** (`localhost` or `https://`), run via the local server:
+### 1. Launch Master Live Service (Server + Tunnel + Auto-Sync)
+To start the local server, generate a live public HTTPS link, and activate real-time GitHub auto-sync with a single command:
 
 ```bash
-npm start
-# OR
-npx serve -l 3000 .
+npm run live
 ```
-Then open **[http://localhost:3000](http://localhost:3000)** in Google Chrome, Microsoft Edge, or Safari.
 
-### 🔄 Real-Time GitHub Auto-Sync
-AirDraw Pro includes a real-time auto-sync engine that monitors workspace files, debounces rapid edits, and automatically commits and pushes all updates to GitHub (`origin main`):
+### 2. Standalone Commands
 
-```bash
-npm run sync
-```
+- **Local Dev Server**:
+  ```bash
+  npm start
+  # Serves at http://localhost:3000
+  ```
+
+- **Live Public Cloudflare Tunnel**:
+  ```bash
+  npm run tunnel
+  # Generates public HTTPS link, updates README.md, Desktop link, and pushes to GitHub
+  ```
+
+- **GitHub Real-Time Auto-Sync Engine**:
+  ```bash
+  npm run sync
+  # Watches workspace and automatically stages, commits, and pushes to GitHub
+  # For one-time sync: npm run sync:once
+  ```
+
+- **Security Hardening Audit**:
+  ```bash
+  npm run security:check
+  ```
 
 ---
 

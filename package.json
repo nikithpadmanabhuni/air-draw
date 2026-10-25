@@ -5,7 +5,10 @@
   "scripts": {
     "start": "npx serve -l 3000 .",
     "dev": "npx serve -l 3000 .",
+    "live": "node scripts/live-sync-service.js",
+    "tunnel": "node scripts/live-tunnel.js",
     "sync": "node auto-sync.js",
+    "sync:once": "node auto-sync.js --once",
     "sync:extensions": "node scripts/sync-extensions.js",
     "security:check": "bash scripts/security-audit.sh"
   },
@@ -17,6 +20,14 @@
     "computer-vision",
     "gestures"
   ],
-  "author": "",
-  "license": "MIT"
+  "author": "nikith",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nikithpadmanabhuni/air-draw.git"
+  },
+  "homepage": "https://nikithpadmanabhuni.github.io/air-draw/",
+  "bugs": {
+    "url": "https://github.com/nikithpadmanabhuni/air-draw/issues"
+  }
 }

@@ -1,5 +1,5 @@
 ---
-updated: 2026-10-25T21:00:00Z
+updated: 2026-10-25T21:55:00Z
 ---
 
 # Project State — AirDraw Pro
@@ -8,23 +8,24 @@ updated: 2026-10-25T21:00:00Z
 
 **Milestone:** v1.0-release-and-ecosystem
 **Phase:** 3 - Multi-Agent & Extension Ecosystem Integration
-**Status:** executing
-**Plan:** Plan 3.5 - System verification and defect resolution
+**Status:** complete
+**Plan:** Plan 3.6 - Automated GitHub push, live public tunnel, and global link ecosystem
 
 ## Last Action
 
-Conducted comprehensive diagnostics, static analysis, and script verification:
-- Fixed gesture classifier shadowing bug where Redo (4 fingers up) was shadowed by Open Palm.
-- Hardened modal dialog `.close()` execution with `.open` guards.
-- Implemented backdrop click light-dismiss on native dialogs.
-- Added responsive 2.5s fallback timer for mouse/touch mode during camera loading.
-- Validated all 27 workflows, 12 skills, 5 subagents, and passed security audit.
+Configured automatic GitHub synchronization and global live links:
+- Upgraded `auto-sync.js` to detect and push unpushed commits, support `--once` flag, and export functions.
+- Engineered `scripts/live-tunnel.js` to create Cloudflare Quick Tunnels, extract HTTPS links, auto-update README, `PUBLIC_LINK.txt`, and desktop shortcuts, and push to GitHub.
+- Created `scripts/live-sync-service.js` daemon to orchestrate local server (3000), Cloudflare tunnel, and real-time git sync.
+- Added GitHub Actions `.github/workflows/deploy.yml` for automated GitHub Pages continuous deployment.
+- Updated `README.md` with global live links, GitHub badges, and phone instructions.
+- Embedded GitHub repository and live ecosystem links directly into `index.html` toolbar and modal.
+- Validated all 27 workflows, 12 skills, 5 subagents, and passed security audit with zero errors.
 
 ## Next Steps
 
-1. Review and stage atomic git commits per GSD rules.
-2. Confirm with user regarding automated browser subagent driver restriction vs local browser access.
-3. Advance to Milestone 4 performance polish backlog.
+1. Launch continuous live daemon (`npm run live`) to maintain active tunnel and auto-sync.
+2. Advance to Milestone 4 performance polish and multi-hand gesture expansion.
 
 ## Active Decisions
 

@@ -19,3 +19,11 @@
                    - Implemented backdrop click light-dismiss handler for native modal dialogs.
                    - Added responsive fallback button timer (2.5s) for smooth mouse/touch mode loading.
                    - Verified dev server (port 3000) and passed all GSD validators and security audit.
+[2026-10-25 21:55] Engineered automated GitHub synchronization and live public links:
+                   - Upgraded auto-sync.js to automatically stage, commit, and push uncommitted & unpushed changes.
+                   - Created scripts/live-tunnel.js with Cloudflare tunnel, auto-updates for README, PUBLIC_LINK.txt, and desktop shortcuts.
+                   - Added scripts/live-sync-service.js master daemon for server, tunnel, and auto-sync.
+                   - Added .github/workflows/deploy.yml for 24/7 automated GitHub Pages deployment.
+                   - Embedded GitHub repository & ecosystem links in index.html toolbar and help dialog.
+                   - Pushed all files and active links directly to GitHub at https://github.com/nikithpadmanabhuni/air-draw.git.
+
