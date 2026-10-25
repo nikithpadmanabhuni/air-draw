@@ -1,0 +1,15 @@
+# AirDraw Pro — Progress Log
+# Used by Ralph Loop, GSD, and Autonomous AI Assistants
+
+[2026-10-24 23:50] Initialized AirDraw Pro core with MediaPipe Hands tracking and 1-Euro smoothing filter.
+[2026-10-24 23:55] Added touchless gesture controls (Undo, Redo, Palm Eraser, Pinch Click, Slider Scrubbing).
+[2026-10-25 00:00] Configured real-time GitHub auto-sync engine in auto-sync.js.
+[2026-10-25 13:10] Installed GSD, Ralph Loop, CodeRabbit, Roo Code, and Claude Code extensions.
+[2026-10-25 13:16] Fixed script line endings (CRLF to LF) and BOM across scripts/ and .agents/. All validators passing.
+[2026-10-25 13:18] Unified extension configuration:
+                   - .vscode/settings.json & .vscode/extensions.json
+                   - .coderabbit.yaml
+                   - .clinerules
+                   - CLAUDE.md & GEMINI.md
+                   - .gsd/SPEC.md, ROADMAP.md, STATE.md, STACK.md, ARCHITECTURE.md
+                   - PRD.md, progress.txt, prompt.md

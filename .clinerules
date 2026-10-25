@@ -1,0 +1,24 @@
+# Roo Code / Cline Workspace Rules — AirDraw Pro
+
+You are operating within the AirDraw Pro workspace. All autonomous coding actions must adhere to the Get Shit Done (GSD) methodology and project guidelines.
+
+## Canonical Rules Source
+Always refer to `PROJECT_RULES.md` as the single source of truth.
+
+## Core Protocols
+1. **SPEC → PLAN → EXECUTE → VERIFY → COMMIT**
+   - Check `.gsd/SPEC.md` and `PRD.md` before initiating major changes.
+   - Maintain discrete atomic tasks.
+   - Update `progress.txt` and `.gsd/STATE.md` as milestones are completed.
+
+2. **Search-First Discipline**
+   - Never load large files blindly. Use ripgrep or targeted reads (`grep_search` / `view_file` line slices).
+
+3. **Domain Constraints (AirDraw Pro)**
+   - Drawing is **single-finger only** via the Index fingertip (☝️).
+   - Canvas operations must remain sub-millisecond to sustain 60 FPS hand tracking with MediaPipe.
+   - Keep glassmorphic UI overlay decoupled from the raw stroke canvas.
+
+4. **Empirical Validation**
+   - Verify every change with empirical output: local server checks (`npm start` / `curl -I http://localhost:3000`), syntax validation, or browser tests.
+   - Run `bash scripts/validate-all.sh` to confirm GSD rules integrity.

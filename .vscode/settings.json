@@ -1,0 +1,23 @@
+{
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "editor.formatOnSave": true,
+
+  "coderabbit.autoReviewMode": "onChange",
+  "coderabbit.respectGitIgnore": true,
+  "coderabbit.completionNotifications": true,
+  "coderabbit.reviewCompletionSound": false,
+
+  "ralph-loop.taskFile": "PRD.md",
+  "ralph-loop.progressFile": "progress.txt",
+  "ralph-loop.promptFile": "prompt.md",
+  "ralph-loop.maxIterations": 25,
+
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/.tmp/**": true
+  }
+}

@@ -1,4 +1,7 @@
 node_modules/
 cloudflare.log
 cloudflare.pid
+auto-sync.log
+*.tmp
 .DS_Store
+
