@@ -16,7 +16,7 @@ let isSyncing = false;
 let pendingChanges = new Set();
 
 const IGNORED_PATTERNS = [
-    /^\.git/,
+    /^\.git(\/|$)/,
     /node_modules/,
     /\.DS_Store/,
     /\.tmp$/,
