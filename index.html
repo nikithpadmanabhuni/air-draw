@@ -1674,7 +1674,8 @@
             laserCtx.clearRect(0, 0, laserCanvas.width, laserCanvas.height);
             state.laserPoints = [];
             pushCanvasState();
-            document.getElementById('clearModal').close();
+            const cm = document.getElementById('clearModal');
+            if (cm && cm.open) cm.close();
             playSound('clear');
             showToast('🗑️ Canvas Cleared');
         }
@@ -1793,7 +1794,7 @@
             link.click();
 
             const modal = document.getElementById('downloadModal');
-            if (modal) modal.close();
+            if (modal && modal.open) modal.close();
             playSound('save');
             showToast('📥 Artwork Downloaded Successfully!');
         }
@@ -2059,14 +2060,14 @@
                 return 'rock';
             }
 
-            // 3. Open Hand: Palm Eraser (all 4 main fingers extended)
-            if (index && middle && ring && pinky) {
-                return 'open';
-            }
-
-            // 4. Redo: Four fingers extended (Index, Middle, Ring, Pinky), Thumb folded
+            // 3. Redo: Four fingers extended (Index, Middle, Ring, Pinky), Thumb folded
             if (!thumb && index && middle && ring && pinky) {
                 return 'four';
+            }
+
+            // 4. Open Hand: Palm Eraser (all 4 main fingers extended)
+            if (index && middle && ring && pinky) {
+                return 'open';
             }
 
             // 5. Undo: Three fingers (Index, Middle, Ring), Pinky curled
@@ -3158,6 +3159,20 @@
             }
         });
 
+        // Close native dialogs on backdrop click
+        document.querySelectorAll('dialog').forEach(dlg => {
+            dlg.addEventListener('click', (e) => {
+                const rect = dlg.getBoundingClientRect();
+                const isInDialog = (
+                    rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+                    rect.left <= e.clientX && e.clientX <= rect.left + rect.width
+                );
+                if (!isInDialog) {
+                    dlg.close();
+                }
+            });
+        });
+
         // ==================== KEYBOARD SHORTCUTS ====================
         document.addEventListener('keydown', (e) => {
             getAudioContext();
@@ -3210,6 +3225,14 @@
             try {
                 const statusEl = document.getElementById('loadingStatusText');
                 if (statusEl) statusEl.textContent = 'Loading MediaPipe Hands Neural Engine...';
+
+                setTimeout(() => {
+                    const fbBtn = document.getElementById('startWithoutCamBtn');
+                    const screen = document.getElementById('loadingScreen');
+                    if (fbBtn && screen && screen.style.display !== 'none') {
+                        fbBtn.style.display = 'inline-block';
+                    }
+                }, 2500);
 
                 hands = new Hands({
                     locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
