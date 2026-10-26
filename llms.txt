@@ -1,0 +1,35 @@
+# AirDraw Pro
+
+> Next-Generation Contactless AI Spatial Drawing Application powered by Google MediaPipe Hands, client-side WebAssembly, sub-pixel 1-Euro adaptive jitter stabilization, and tactile sound synthesis.
+
+## Quick Facts
+- **Application Type**: Touchless In-Air Drawing Web Application (PWA)
+- **Official URL**: https://nikithpadmanabhuni.github.io/air-draw/
+- **GitHub Repository**: https://github.com/nikithpadmanabhuni/air-draw
+- **Author**: Nikith Padmanabhuni
+- **License**: MIT
+- **Inference Engine**: Google MediaPipe Hands (21 3D landmarks, WebAssembly)
+- **Target Performance**: 60 FPS rendering, <16ms end-to-end latency
+- **Platform Support**: Cross-platform Web, iOS Safari (iPhone & iPad), Android Chrome, macOS, Windows, Linux
+
+## Core Invariant
+- **Single-Finger Air Drawing**: Drawing occurs exclusively when the Index Fingertip (☝️) is raised in the air. The cursor follows landmark index 8 stabilized by a dual-pole One-Euro adaptive filter.
+
+## Gesture Command Mapping
+- ☝️ **Index Point**: Precision drawing on canvas or air-aiming cursor.
+- ✌️ **Peace Sign (V)**: Navigate / hover cursor without drawing (pen up).
+- 🤏 **Pinch (Thumb + Index)**: Air-tap click or drag floating windows.
+- 🖐️ **Open Palm**: Spatial circular eraser (erases strokes within bounding radius).
+- ✊ **Fist**: Pause / rest hand without triggering unintended strokes.
+- 3️⃣ **Three Fingers Up**: Instant Undo (reverts last stroke).
+- 4️⃣ **Four Fingers Up**: Instant Redo (restores reverted stroke).
+- 🤟 **Rock Gesture**: Clear entire canvas.
+- 👍 **Thumbs Up**: Quick-save drawing to local browser memory.
+
+## Privacy & Security
+- 100% On-Device Client Inference.
+- Video stream from the webcam/phone camera never leaves the user's browser.
+- Zero server-side video streaming or telemetry.
+
+## Optional Full Documentation
+- Full Technical Architecture & Mathematical Models: [llms-full.txt](https://nikithpadmanabhuni.github.io/air-draw/llms-full.txt)

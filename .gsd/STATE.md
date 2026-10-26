@@ -1,25 +1,32 @@
 ---
-updated: 2026-10-25T21:55:00Z
+updated: 2026-10-26T19:50:00Z
 ---
 
 # Project State — AirDraw Pro
 
 ## Current Position
 
-**Milestone:** v1.0-release-and-ecosystem
-**Phase:** 3 - Multi-Agent & Extension Ecosystem Integration
+**Milestone:** v1.1-mobile-and-advanced-standards
+**Phase:** 4 - Mobile Phone Optimization, Error Hardening & SEO/AEO/GEO Integration
 **Status:** complete
-**Plan:** Plan 3.6 - Automated GitHub push, live public tunnel, and global link ecosystem
+**Plan:** Plan 4.1 - Mobile multi-camera, wake-lock, gesture stability, PWA, Schema.org, and LLM optimization
 
 ## Last Action
 
-Configured automatic GitHub synchronization and global live links:
-- Upgraded `auto-sync.js` to detect and push unpushed commits, support `--once` flag, and export functions.
-- Engineered `scripts/live-tunnel.js` to create Cloudflare Quick Tunnels, extract HTTPS links, auto-update README, `PUBLIC_LINK.txt`, and desktop shortcuts, and push to GitHub.
-- Created `scripts/live-sync-service.js` daemon to orchestrate local server (3000), Cloudflare tunnel, and real-time git sync.
-- Added GitHub Actions `.github/workflows/deploy.yml` for automated GitHub Pages continuous deployment.
-- Updated `README.md` with global live links, GitHub badges, and phone instructions.
-- Embedded GitHub repository and live ecosystem links directly into `index.html` toolbar and modal.
+Engineered mobile smartphone architecture, resolved error diagnostics, and implemented advanced SEO, AEO, and GEO standards:
+- Fixed pointer/touch drawing cursor mismatch error in `index.html` via `renderPointerCursor`.
+- Fixed canvas aspect-ratio distortion on mobile screen orientation changes (portrait <-> landscape).
+- Integrated Screen Wake Lock API to prevent mobile phone display timeout during hands-free air drawing.
+- Added toolbar camera switch button (📷/🤳) and 'X' shortcut for mobile front selfie and rear camera toggling.
+- Built multi-tier mobile camera constraint fallback preserving `facingMode`.
+- Added mobile quick brush size cycler (`mobileSizeBtn`) for smartphones when sliders are collapsed.
+- Redesigned mobile HUD and cheatsheet positioning to prevent screen overlap on small mobile viewports.
+- Added adaptive MediaPipe options (single-hand complexity 0 for phones, complexity 1 for desktop) for 60 FPS mobile performance.
+- Created `manifest.webmanifest` for Progressive Web App (PWA) installation on iOS and Android.
+- Added `robots.txt` and `sitemap.xml` with full indexing for search engines and AI Answer Engine bots.
+- Implemented comprehensive Schema.org JSON-LD structured data (`WebApplication`, `FAQPage`, `HowTo`).
+- Created `/llms.txt` and `/llms-full.txt` providing modern Generative Engine Optimization (GEO) context for AI models.
+- Added crawler-accessible semantic HTML landmarks and structured content (`.sr-only-seo`).
 - Validated all 27 workflows, 12 skills, 5 subagents, and passed security audit with zero errors.
 
 ## Next Steps

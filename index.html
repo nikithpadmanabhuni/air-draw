@@ -3,15 +3,185 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AirDraw Pro — Contactless AI Spatial Drawing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>AirDraw Pro — Contactless AI Spatial Drawing & Hand Tracking Canvas</title>
     <meta name="description"
-        content="State-of-the-art air drawing web app powered by Google MediaPipe AI hand tracking, sub-pixel rendering, multi-camera switching, and tactile sound synthesis.">
+        content="State-of-the-art touchless air drawing web application powered by Google MediaPipe AI hand tracking, sub-pixel 1-Euro stabilization filter, mobile front/back camera switching, neon glow strokes, and tactile audio synthesis.">
+    <meta name="keywords"
+        content="air draw, touchless drawing, mediapipe hands, hand tracking canvas, gesture drawing, computer vision, AI drawing web app, mobile camera drawing, contactless canvas, neon brush">
+    <meta name="author" content="Nikith Padmanabhuni">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://nikithpadmanabhuni.github.io/air-draw/">
+    <link rel="help" href="llms.txt" type="text/markdown" title="LLM Context Documentation">
+
+    <!-- Mobile & PWA Optimization Standards -->
+    <meta name="theme-color" content="#06070a">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="AirDraw Pro">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%2306070a' stroke='%2300e5ff' stroke-width='6'/%3E%3Ccircle cx='50' cy='50' r='18' fill='%23ff007f'/%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2306070a'/%3E%3Ccircle cx='50' cy='50' r='36' stroke='%2300e5ff' stroke-width='8' fill='none'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23ff007f'/%3E%3C/svg%3E">
+
+    <!-- Open Graph Protocol (SEO / Social Sharing) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="AirDraw Pro — Contactless AI Spatial Drawing">
+    <meta property="og:description"
+        content="Draw in the air with hand gestures in your browser! Powered by Google MediaPipe AI, sub-pixel stabilization, and mobile camera switching.">
+    <meta property="og:url" content="https://nikithpadmanabhuni.github.io/air-draw/">
+    <meta property="og:site_name" content="AirDraw Pro">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://nikithpadmanabhuni.github.io/air-draw/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="AirDraw Pro AI touchless spatial drawing in mid-air">
+
+    <!-- Twitter Card Standards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AirDraw Pro — Contactless AI Spatial Drawing">
+    <meta name="twitter:description"
+        content="Draw in the air with hand gestures! Powered by Google MediaPipe AI hand tracking, sub-pixel 1-Euro filter, and mobile camera switching.">
+    <meta name="twitter:image" content="https://nikithpadmanabhuni.github.io/air-draw/og-image.png">
+    <meta name="twitter:creator" content="@nikithpadmanabhuni">
+
+    <!-- GEO (Geographic & Multi-Region Standards) -->
+    <meta name="geo.region" content="GLOBAL">
+    <meta name="geo.placename" content="Global Web Application">
+    <meta name="geo.position" content="0.000000;0.000000">
+    <meta name="ICBM" content="0.000000, 0.000000">
+    <meta name="distribution" content="global">
+    <meta name="rating" content="general">
 
     <!-- Security Headers -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self' https://cdn.jsdelivr.net https://*.jsdelivr.net data: blob:; frame-ancestors 'none'; base-uri 'self';">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- AEO & GEO Structured Data: Schema.org WebApplication, FAQPage & HowTo -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://nikithpadmanabhuni.github.io/air-draw/#webapp",
+          "name": "AirDraw Pro",
+          "alternateName": ["Air Draw AI", "Touchless Air Drawing Canvas", "AirDraw Pro Web"],
+          "url": "https://nikithpadmanabhuni.github.io/air-draw/",
+          "description": "AI-powered contactless spatial drawing web application. Draw neon strokes in mid-air using hand tracking powered by Google MediaPipe, sub-pixel 1-Euro stabilization filter, and multi-camera phone support.",
+          "applicationCategory": "MultimediaApplication",
+          "operatingSystem": "All (iOS, Android, Windows, macOS, Linux, ChromeOS)",
+          "browserRequirements": "Requires WebRTC and Camera support",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "author": {
+            "@type": "Person",
+            "name": "Nikith Padmanabhuni",
+            "url": "https://github.com/nikithpadmanabhuni"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "AirDraw Pro Open Source Project",
+            "url": "https://github.com/nikithpadmanabhuni/air-draw"
+          },
+          "featureList": [
+            "Touchless air drawing via Google MediaPipe Hands AI",
+            "Single-finger precision drawing invariant (☝️ Index fingertip)",
+            "Dual-pole 1-Euro adaptive jitter stabilization filter",
+            "Multi-finger gesture commands (Undo, Redo, Palm Eraser, Clear, Save)",
+            "Front and rear camera switching for mobile smartphones and tablets",
+            "Instant air-touch screen button selection and panel dragging",
+            "Multi-layer canvas rendering with neon glow strokes at 60 FPS",
+            "100% on-device client WebAssembly inference with zero server data transfer"
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://nikithpadmanabhuni.github.io/air-draw/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is AirDraw Pro and how does air drawing work?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "AirDraw Pro is an AI-driven touchless air drawing web application that tracks 21 3D hand landmarks in real time through your webcam or smartphone camera using Google MediaPipe Hands and client-side WebAssembly. Users raise their index finger (☝️) to draw glowing neon strokes in mid-air with sub-pixel precision."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does AirDraw Pro work on mobile phones (iPhone and Android)?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, AirDraw Pro is fully optimized for mobile devices. It supports front selfie and rear camera switching, Screen Wake Lock to prevent phone screen timeout, responsive touch interfaces, and hardware-accelerated 60 FPS WebGL rendering on both iOS Safari and Android Chrome."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What hand gestures control AirDraw Pro?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "AirDraw Pro recognizes: ☝️ Index Point to draw strokes or point at toolbar items, ✌️ Peace Sign to hover without drawing, 🤏 Pinch to air-tap buttons or drag panels, 🖐️ Open Palm to erase strokes, 3️⃣ Three Fingers Up to Undo, 4️⃣ Four Fingers Up to Redo, 🤟 Rock sign to clear the canvas, and 👍 Thumbs Up to quick-save your artwork."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is my webcam video private and secure?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, 100%. All computer vision neural network processing is performed locally on your device via WebAssembly. No video frames, images, or biometric telemetry are ever transmitted across the network or stored on external servers."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do I need special hardware or VR headsets to use AirDraw?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. AirDraw Pro operates in standard modern web browsers with any standard built-in laptop webcam, USB camera, or mobile smartphone camera."
+              }
+            }
+          ]
+        },
+        {
+          "@type": "HowTo",
+          "@id": "https://nikithpadmanabhuni.github.io/air-draw/#howto",
+          "name": "How to Draw in the Air Using Your Webcam or Phone Camera",
+          "description": "Step-by-step guide to touchless air drawing with Google MediaPipe Hands in AirDraw Pro.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "name": "Allow Camera Access",
+              "text": "Open AirDraw Pro in your web browser and click Allow when prompted for camera permissions."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Raise Your Index Finger",
+              "text": "Hold your hand up to the camera and extend your index finger (☝️) to begin drawing glowing neon lines."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Select Colors and Tools in Mid-Air",
+              "text": "Point your finger at any color swatch or tool button on screen to select it with air-touch dwell or pinch."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Erase or Clear",
+              "text": "Show an open palm (🖐️) to erase strokes like a physical whiteboard eraser, or make a rock sign (🤟) to clear."
+            },
+            {
+              "@type": "HowToStep",
+              "name": "Save and Export",
+              "text": "Make a thumbs up gesture (👍) or tap the download button to export high-resolution PNG artwork."
+            }
+          ]
+        }
+      ]
+    }
+    </script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -917,13 +1087,36 @@
             font-size: 12px;
         }
 
+        .sr-only-seo {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        .mobile-size-btn {
+            display: none;
+            font-size: 11px;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            background: rgba(0, 229, 255, 0.15);
+            border-color: var(--accent-cyan);
+            color: #fff;
+        }
+
         /* Responsive Mobile Layout for Phones & Small Screens */
         @media (max-width: 768px) {
             #toolbar {
                 top: 8px;
-                padding: 6px 12px;
+                padding: 6px 10px;
                 gap: 5px;
                 max-width: 98vw;
+                -webkit-overflow-scrolling: touch;
             }
 
             .brand-badge {
@@ -932,44 +1125,153 @@
             }
 
             .tool-btn {
-                width: 32px;
-                height: 32px;
+                width: 34px;
+                height: 34px;
                 font-size: 14px;
+                flex-shrink: 0;
             }
 
             .color-btn {
-                width: 22px;
-                height: 22px;
+                width: 24px;
+                height: 24px;
+                flex-shrink: 0;
             }
 
             .slider-group {
                 display: none;
             }
 
+            .mobile-size-btn {
+                display: inline-flex;
+            }
+
             #modeHeader {
-                top: 56px;
-                font-size: 11px;
-                padding: 4px 12px;
+                top: 50px;
+                font-size: 10.5px;
+                padding: 4px 10px;
+                max-width: 92vw;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            #guidanceBanner {
+                top: 82px;
+                font-size: 10px;
+                padding: 4px 10px;
+                max-width: 92vw;
             }
 
             #hudPanel {
-                top: auto;
-                bottom: 12px;
-                left: 12px;
+                bottom: 10px;
+                left: 10px;
                 padding: 8px 10px;
-                max-width: 170px;
+                max-width: 155px;
+                min-width: 135px;
+                font-size: 10.5px;
+                border-radius: 14px;
+                gap: 5px;
             }
 
+            #hudPanel .hud-row {
+                font-size: 10.5px;
+                gap: 6px;
+            }
+
+            .finger-monitor {
+                gap: 3px;
+                margin-top: 4px;
+                padding-top: 4px;
+            }
+
+            .finger-pip {
+                height: 4px;
+            }
+
+            .finger-item span {
+                font-size: 7.5px;
+            }
+
+            #cheatsheetPanel {
+                bottom: 10px;
+                right: 10px;
+                max-width: 175px;
+                padding: 10px 12px;
+                font-size: 11px;
+                border-radius: 14px;
+            }
+
+            #cheatsheetPanel.minimized {
+                transform: translateY(calc(100% - 36px));
+            }
+
+            .cheatsheet-title {
+                font-size: 10.5px;
+            }
+
+            .gesture-item {
+                font-size: 10.5px;
+                gap: 6px;
+                padding: 2px 4px;
+            }
+
+            .gesture-emoji {
+                font-size: 13px;
+                width: 16px;
+            }
+
+            .gesture-desc {
+                font-size: 9.5px;
+            }
         }
     </style>
 </head>
 
 <body>
     <main id="appViewport">
-        <video id="webcam" autoplay playsinline muted></video>
+        <video id="webcam" autoplay playsinline webkit-playsinline muted></video>
         <canvas id="drawingCanvas"></canvas>
         <canvas id="laserCanvas"></canvas>
         <canvas id="uiCanvas"></canvas>
+
+        <!-- Crawler-Accessible Semantic Architecture (SEO, AEO & GEO) -->
+        <article class="sr-only-seo" aria-label="AirDraw Pro Overview and Architecture">
+            <header>
+                <h1>AirDraw Pro: AI-Powered Contactless Spatial Air Drawing Web Application</h1>
+                <p>AirDraw Pro is a state-of-the-art touchless air drawing system that tracks 21 3D hand landmarks in real time through webcams and phone cameras using Google MediaPipe Hands, client-side WebAssembly, and dual-pole 1-Euro adaptive jitter stabilization.</p>
+            </header>
+            <section aria-label="Key System Features">
+                <h2>Key Capabilities & Performance Standards</h2>
+                <ul>
+                    <li>Single-Finger Drawing Invariant: The index fingertip (☝️) creates sub-pixel smoothed neon strokes at 60 frames per second.</li>
+                    <li>Adaptive 1-Euro Filter: Low-frequency cutoff f_min=1.2Hz and beta=0.025 eliminate hand tremor while preserving zero-latency response during quick strokes.</li>
+                    <li>Mobile Phone Architecture: Supports both front selfie camera and rear environment camera switching with auto-mirroring adaptation.</li>
+                    <li>Spatial In-Air Controls: Pinch-to-click (🤏) and dwell timer (250ms) enable hands-free UI button selection and floating window dragging.</li>
+                    <li>Comprehensive Multi-Finger Gestures: Open palm eraser (🖐️), three-finger Undo (3️⃣), four-finger Redo (4️⃣), rock clear (🤟), and thumbs up save (👍).</li>
+                    <li>Complete Client-Side Privacy: 100% on-device WebAssembly inference. No video feeds or biometric telemetry are ever uploaded or transmitted across networks.</li>
+                </ul>
+            </section>
+            <section aria-label="Gesture Command Table">
+                <h2>Supported Hand Gesture Commands</h2>
+                <table>
+                    <thead><tr><th>Gesture</th><th>Trigger</th><th>Function</th></tr></thead>
+                    <tbody>
+                        <tr><td>Index Point (☝️)</td><td>Single index extended</td><td>Precision drawing or air cursor aiming</td></tr>
+                        <tr><td>Peace Sign (✌️)</td><td>Index & Middle extended</td><td>Navigate cursor without drawing (Pen Up)</td></tr>
+                        <tr><td>Pinch (🤏)</td><td>Thumb & Index tips touching</td><td>Instant Air-Tap button selection & window drag</td></tr>
+                        <tr><td>Open Palm (🖐️)</td><td>All fingers extended</td><td>Circular spatial whiteboard eraser</td></tr>
+                        <tr><td>Three Fingers (3️⃣)</td><td>Index, Middle, Ring up</td><td>Instant Undo last stroke</td></tr>
+                        <tr><td>Four Fingers (4️⃣)</td><td>Index, Middle, Ring, Pinky up</td><td>Instant Redo reverted stroke</td></tr>
+                        <tr><td>Rock Sign (🤟)</td><td>Index & Pinky up</td><td>Clear canvas</td></tr>
+                        <tr><td>Thumbs Up (👍)</td><td>Thumb up, fingers curled</td><td>Save drawing to local storage</td></tr>
+                    </tbody>
+                </table>
+            </section>
+            <section aria-label="Mobile and Cross Platform Support">
+                <h2>Mobile Smartphone & Tablet Compatibility</h2>
+                <p>AirDraw Pro is engineered for smartphones (iOS Safari iPhone, Android Chrome, iPad, Samsung Internet). It features Screen Wake Lock to keep the display active during mid-air drawing, proactive AudioContext unlocking on touch, and lightweight neural network inference options for 60 FPS mobile performance.</p>
+            </section>
+        </article>
 
         <!-- Camera Status / Permission Alert -->
         <div id="cameraAlertBanner" class="camera-alert-banner">
@@ -1036,6 +1338,10 @@
 
             <div class="separator"></div>
 
+            <!-- Mobile Quick Size Toggle (Visible on phone screens) -->
+            <button class="tool-btn mobile-size-btn" id="mobileSizeBtn" title="Brush Size (Tap to cycle)"
+                onclick="cycleMobileBrushSize()" aria-label="Cycle Brush Size">6px</button>
+
             <!-- Brush Size -->
             <div class="slider-group" title="Adjust Brush Width">
                 <span class="size-indicator-dot" id="sizePreviewDot"></span>
@@ -1062,6 +1368,10 @@
                 <option value="slate">📓 Blackboard</option>
                 <option value="white">📄 Whiteboard</option>
             </select>
+
+            <!-- Mobile & Desktop Camera Flip (Front / Back) -->
+            <button class="tool-btn" id="switchCamBtn" title="Switch Camera Front / Back (Key: X)"
+                onclick="switchCamera()" aria-label="Switch Camera">📷</button>
 
             <div class="separator"></div>
 
@@ -1297,6 +1607,8 @@
                 <div>Download Image (.png)</div>
                 <div><span class="key-badge">M</span></div>
                 <div>Mute / Unmute Audio Sound FX</div>
+                <div><span class="key-badge">X</span></div>
+                <div>Switch Camera (Front Selfie / Rear)</div>
                 <div><span class="key-badge">F</span></div>
                 <div>Toggle Fullscreen</div>
             </div>
@@ -1477,6 +1789,7 @@
         function resizeCanvases() {
             const w = window.innerWidth;
             const h = window.innerHeight;
+            if (drawingCanvas.width === w && drawingCanvas.height === h) return;
 
             const temp = document.createElement('canvas');
             temp.width = drawingCanvas.width;
@@ -1494,11 +1807,13 @@
             uiCanvas.height = h;
 
             if (temp.width > 0 && temp.height > 0) {
-                drawCtx.drawImage(temp, 0, 0, w, h);
+                // Preserves 1:1 scale on phone orientation changes (no stretching)
+                drawCtx.drawImage(temp, 0, 0);
             }
         }
 
         window.addEventListener('resize', resizeCanvases);
+        window.addEventListener('orientationchange', () => setTimeout(resizeCanvases, 150));
         resizeCanvases();
 
         // ==================== DRAWING HISTORY (UNDO / REDO) ====================
@@ -1705,11 +2020,63 @@
             document.getElementById('shortcutsModal').showModal();
         }
 
+        // ==================== SCREEN WAKE LOCK (PREVENT PHONE SLEEP) ====================
+        let screenWakeLock = null;
+        async function requestScreenWakeLock() {
+            if ('wakeLock' in navigator && document.visibilityState === 'visible') {
+                try {
+                    screenWakeLock = await navigator.wakeLock.request('screen');
+                    screenWakeLock.addEventListener('release', () => { screenWakeLock = null; });
+                } catch (wakeErr) {
+                    // Non-fatal, e.g. low-power mode
+                }
+            }
+        }
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') requestScreenWakeLock();
+        });
+
+        // Mobile audio unlocking on first user touch/tap
+        function primeAudioOnFirstInteraction() {
+            getAudioContext();
+            ['pointerdown', 'touchstart', 'click'].forEach(evt => {
+                window.removeEventListener(evt, primeAudioOnFirstInteraction);
+            });
+        }
+        ['pointerdown', 'touchstart', 'click'].forEach(evt => {
+            window.addEventListener(evt, primeAudioOnFirstInteraction, { passive: true });
+        });
+
+        const MOBILE_SIZES = [4, 8, 14, 24];
+        let mobileSizeIdx = 1; // 8px
+        function cycleMobileBrushSize() {
+            mobileSizeIdx = (mobileSizeIdx + 1) % MOBILE_SIZES.length;
+            const sz = MOBILE_SIZES[mobileSizeIdx];
+            state.brushSize = sz;
+            const slider = document.getElementById('brushSize');
+            if (slider) slider.value = sz;
+            const label = document.getElementById('brushSizeLabel');
+            if (label) label.textContent = `${sz}px`;
+            const mobileBtn = document.getElementById('mobileSizeBtn');
+            if (mobileBtn) mobileBtn.textContent = `${sz}px`;
+            const dot = document.getElementById('sizePreviewDot');
+            if (dot) {
+                dot.style.width = `${Math.min(sz, 14)}px`;
+                dot.style.height = `${Math.min(sz, 14)}px`;
+            }
+            playSound('click');
+            showToast(`📏 Brush Size: ${sz}px`);
+        }
+
         function toggleFullscreen() {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(() => { });
-            } else {
-                document.exitFullscreen().catch(() => { });
+            const docEl = document.documentElement;
+            const req = docEl.requestFullscreen || docEl.webkitRequestFullscreen || docEl.mozRequestFullScreen || docEl.msRequestFullscreen;
+            const exit = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen;
+            const isFull = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement;
+            if (!isFull && req) {
+                req.call(docEl).catch(() => { });
+            } else if (exit) {
+                exit.call(document).catch(() => { });
             }
             playSound('click');
         }
@@ -1717,10 +2084,19 @@
         async function switchCamera() {
             playSound('click');
             const newFacing = state.facingMode === 'user' ? 'environment' : 'user';
+            const btn = document.getElementById('switchCamBtn');
+            if (btn) btn.classList.add('active');
             showToast(`🔄 Switching to ${newFacing === 'user' ? 'Front' : 'Back'} Camera...`);
             const ok = await setupCamera(newFacing);
             if (ok) {
+                if (btn) {
+                    btn.textContent = newFacing === 'user' ? '📷' : '🤳';
+                    btn.title = `Switch Camera (Current: ${newFacing === 'user' ? 'Front' : 'Back'}) [X]`;
+                    btn.classList.toggle('active', newFacing === 'environment');
+                }
                 showToast(`✨ ${newFacing === 'user' ? 'Front' : 'Back'} Camera active`);
+            } else {
+                if (btn) btn.classList.remove('active');
             }
         }
 
@@ -3007,28 +3383,47 @@
                 }
 
                 let stream = null;
+                const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || (window.innerWidth <= 768);
+
+                // Multi-tier constraint fallback preserving facingMode on mobile
                 try {
                     stream = await navigator.mediaDevices.getUserMedia({
                         video: {
                             facingMode: { ideal: facingMode },
-                            width: { ideal: 1280 },
-                            height: { ideal: 720 },
-                            frameRate: { ideal: 60, min: 24 }
+                            width: isMobile ? { ideal: 1280 } : { ideal: 1280 },
+                            height: isMobile ? { ideal: 720 } : { ideal: 720 },
+                            frameRate: { ideal: 60, min: 20 }
                         },
                         audio: false
                     });
                 } catch (constraintErr) {
-                    console.warn('Ideal camera constraints failed, attempting fallback:', constraintErr);
-                    stream = await navigator.mediaDevices.getUserMedia({
-                        video: true,
-                        audio: false
-                    });
+                    console.warn('Preferred camera constraints rejected, attempting facingMode fallback:', constraintErr);
+                    try {
+                        stream = await navigator.mediaDevices.getUserMedia({
+                            video: { facingMode: { ideal: facingMode } },
+                            audio: false
+                        });
+                    } catch (e2) {
+                        try {
+                            stream = await navigator.mediaDevices.getUserMedia({
+                                video: { facingMode: facingMode },
+                                audio: false
+                            });
+                        } catch (e3) {
+                            stream = await navigator.mediaDevices.getUserMedia({
+                                video: true,
+                                audio: false
+                            });
+                        }
+                    }
                 }
 
                 mediaStream = stream;
                 video.srcObject = stream;
                 video.muted = true;
                 video.playsInline = true;
+                video.setAttribute('playsinline', '');
+                video.setAttribute('webkit-playsinline', '');
 
                 await new Promise((resolve, reject) => {
                     const timeout = setTimeout(() => {
@@ -3050,19 +3445,20 @@
                 await video.play().catch(e => console.warn('video.play notice:', e));
                 state.facingMode = facingMode;
 
-                // Adjust mirror effect
+                // Adjust mirror effect: User (front) camera is mirrored, Environment (rear) camera is un-mirrored
                 const mirrorStyle = facingMode === 'user' ? 'scaleX(-1)' : 'scaleX(1)';
                 video.style.transform = mirrorStyle;
                 drawingCanvas.style.transform = mirrorStyle;
                 laserCanvas.style.transform = mirrorStyle;
                 uiCanvas.style.transform = mirrorStyle;
 
+                requestScreenWakeLock();
                 hideCameraWarning();
                 startFrameProcessing();
                 return true;
             } catch (err) {
                 console.error('Camera stream error:', err);
-                showCameraWarning(`Camera notice: ${err.message || 'Permission denied or camera unavailable'}. You can still draw with mouse or click Grant Camera.`);
+                showCameraWarning(`Camera notice: ${err.message || 'Permission denied or camera unavailable'}. You can still draw with touch/mouse or click Grant Camera.`);
                 const fbBtn = document.getElementById('startWithoutCamBtn');
                 if (fbBtn) fbBtn.style.display = 'inline-block';
                 return false;
@@ -3147,6 +3543,33 @@
             return { x, y };
         }
 
+        function renderPointerCursor(pt) {
+            uiCtx.clearRect(0, 0, uiCanvas.width, uiCanvas.height);
+            uiCtx.save();
+            const sz = state.brushSize;
+            const c = state.rainbowMode ? `hsl(${state.rainbowHue}, 100%, 55%)` : state.currentColor;
+            if (state.currentTool === 'eraser') {
+                uiCtx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+                uiCtx.lineWidth = 2;
+                uiCtx.setLineDash([4, 4]);
+                uiCtx.beginPath();
+                uiCtx.arc(pt.x, pt.y, CONFIG.eraserRadius, 0, Math.PI * 2);
+                uiCtx.stroke();
+            } else {
+                uiCtx.strokeStyle = c;
+                uiCtx.lineWidth = 2;
+                uiCtx.beginPath();
+                uiCtx.arc(pt.x, pt.y, sz + 5, 0, Math.PI * 2);
+                uiCtx.stroke();
+
+                uiCtx.fillStyle = c;
+                uiCtx.beginPath();
+                uiCtx.arc(pt.x, pt.y, Math.max(sz / 2, 2.5), 0, Math.PI * 2);
+                uiCtx.fill();
+            }
+            uiCtx.restore();
+        }
+
         drawingCanvas.addEventListener('pointerdown', (e) => {
             getAudioContext();
             state.isMouseDown = true;
@@ -3163,15 +3586,32 @@
             if (!state.isMouseDown) return;
             const pt = getCanvasPoint(e);
             processStroke(pt);
-            renderUIOverlay(null, pt.x, pt.y, state.currentTool, 0);
+            renderPointerCursor(pt);
         });
 
         window.addEventListener('pointerup', () => {
             if (state.isMouseDown) {
                 state.isMouseDown = false;
                 stopStroke();
+                uiCtx.clearRect(0, 0, uiCanvas.width, uiCanvas.height);
             }
         });
+
+        window.addEventListener('pointercancel', () => {
+            if (state.isMouseDown) {
+                state.isMouseDown = false;
+                stopStroke();
+                uiCtx.clearRect(0, 0, uiCanvas.width, uiCanvas.height);
+            }
+        });
+
+        // Prevent pull-to-refresh & pinch zoom gestures while drawing on touchscreens
+        drawingCanvas.addEventListener('touchstart', (e) => {
+            if (e.target === drawingCanvas) e.preventDefault();
+        }, { passive: false });
+        drawingCanvas.addEventListener('touchmove', (e) => {
+            if (e.target === drawingCanvas) e.preventDefault();
+        }, { passive: false });
 
         // Close native dialogs on backdrop click
         document.querySelectorAll('dialog').forEach(dlg => {
@@ -3222,6 +3662,7 @@
                 case 'c': openClearModal(); break;
                 case 'm': toggleAudio(); break;
                 case 'f': toggleFullscreen(); break;
+                case 'x': switchCamera(); break;
                 case '?': openShortcutsModal(); break;
                 case '1': setColor(PALETTE[0]); break;
                 case '2': setColor(PALETTE[1]); break;
@@ -3240,6 +3681,16 @@
                 const statusEl = document.getElementById('loadingStatusText');
                 if (statusEl) statusEl.textContent = 'Loading MediaPipe Hands Neural Engine...';
 
+                const isMobilePhone = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth <= 768);
+                if (isMobilePhone) {
+                    const cheat = document.getElementById('cheatsheetPanel');
+                    const cheatBtn = document.getElementById('cheatsheetToggleBtn');
+                    if (cheat && !cheat.classList.contains('minimized')) {
+                        cheat.classList.add('minimized');
+                        if (cheatBtn) cheatBtn.textContent = '▴';
+                    }
+                }
+
                 setTimeout(() => {
                     const fbBtn = document.getElementById('startWithoutCamBtn');
                     const screen = document.getElementById('loadingScreen');
@@ -3252,9 +3703,10 @@
                     locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
                 });
 
+                // Optimize model complexity for phones to maintain silky 60 FPS
                 hands.setOptions({
-                    maxNumHands: 2,
-                    modelComplexity: 1,
+                    maxNumHands: isMobilePhone ? 1 : 2,
+                    modelComplexity: isMobilePhone ? 0 : 1,
                     minDetectionConfidence: 0.5,
                     minTrackingConfidence: 0.5
                 });
@@ -3271,7 +3723,7 @@
                     screen.style.opacity = '0';
                     setTimeout(() => {
                         screen.style.display = 'none';
-                        showToast(camOk ? '✨ AirDraw Pro Ready! Hold hand in front of camera.' : '🖱️ Mouse & Touch drawing active');
+                        showToast(camOk ? '✨ AirDraw Pro Ready! Hold hand in front of camera.' : '🖱️ Touch & Mouse drawing active');
                     }, 400);
                 }
 

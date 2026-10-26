@@ -1,0 +1,37 @@
+# AirDraw Pro — Complete Technical Specification & Documentation
+
+## 1. Executive Summary
+AirDraw Pro is an AI-powered touchless web application that enables users to draw, sketch, and interact with canvas elements in mid-air using hand gestures captured by standard laptop webcams or mobile smartphone cameras (front and rear). It operates without special hardware, depth sensors, or wearables.
+
+## 2. Mathematical Models & Signal Processing
+### 2.1 One-Euro Adaptive Filter
+Fingertip tracking in video streams suffers from high-frequency jitter at low velocities and lag at high velocities. AirDraw Pro implements an adaptive dual-cutoff 1-Euro filter:
+- Cutoff frequency: f_c = f_min + beta * |v_e|
+- Alpha smoothing parameter: alpha = 1 / (1 + tau / T_e) where tau = 1 / (2 * pi * f_c)
+- Default tuning: f_min = 1.2 Hz, beta = 0.025, d_cutoff = 1.0 Hz.
+This produces zero perceived latency during swift sweeps while locking jitter to sub-pixel levels when drawing delicate contours.
+
+### 2.2 Invariant Finger Extension & Joint Cosine Metric
+Instead of naive bounding-box or y-coordinate checks that fail when the hand tilts or rotates, finger extension is computed using the direction cosine between joint vectors:
+- Joint cosine: cos(theta) = (v1 · v2) / (|v1| * |v2|)
+- Segment extension perimeter: P = dist(MCP, PIP) + dist(PIP, DIP) + dist(DIP, TIP)
+- Extension ratio: R = dist(MCP, TIP) / P > 0.58
+This ensures robust gesture classification regardless of camera angle or hand orientation.
+
+## 3. Mobile Architecture (Phone Support)
+- **Camera Stream Management**: Dynamic camera switching between front ('user') and rear ('environment') sensors via `navigator.mediaDevices.getUserMedia`.
+- **Mirroring Adaptation**: Front camera activates horizontal mirroring (`scaleX(-1)`) for natural selfie interaction; rear camera automatically disables mirroring (`scaleX(1)`).
+- **Screen Wake Lock**: Automatically acquires `navigator.wakeLock.request('screen')` during active sessions to prevent phone screen timeout while drawing touchlessly.
+- **AudioContext Unlocking**: Proactive audio context resumption on first touch or pointer interaction to conform to iOS Safari and Android media engagement policies.
+- **Dual Input Mode**: Touch & stylus direct drawing alongside touchless camera tracking.
+
+## 4. Multi-Layer Canvas Compositing
+1. Video Element (z-index: 1): Background webcam stream.
+2. Drawing Canvas (z-index: 2): Persistent stroke buffer with multi-pass neon glow auras.
+3. Laser Canvas (z-index: 3): Decaying temporal trail for live presentations.
+4. UI Canvas (z-index: 4): Hand skeleton wireframe, fingertip precision reticle, and air-touch dwell rings.
+
+## 5. Privacy Guarantees
+- 100% Client-Side WebAssembly inference via Google MediaPipe Hands.
+- No network requests transmit camera frames, audio, or biometric landmark data.
+- Works offline as an installable Progressive Web App (PWA).
