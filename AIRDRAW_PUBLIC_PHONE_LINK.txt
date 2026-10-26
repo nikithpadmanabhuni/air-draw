@@ -3,7 +3,7 @@
 ========================================================================
 
 🌍 GLOBAL PUBLIC HTTPS LINK (iPhone, Android, Tablets, PC worldwide):
-https://pizza-agents-reveal-transparency.trycloudflare.com
+https://participants-westminster-regards-injection.trycloudflare.com
 
 📱 LOCAL WI-FI LINK (Devices on the same local network):
 http://192.168.0.121:3000
