@@ -6,7 +6,9 @@
 - **Application Type**: Touchless In-Air Drawing Web Application (PWA)
 - **Official URL**: https://nikithpadmanabhuni.github.io/air-draw/
 - **GitHub Repository**: https://github.com/nikithpadmanabhuni/air-draw
-- **Author**: Nikith Padmanabhuni
+- **Author**: nikith padmanabhuni
+- **Copyright**: made by nikith padmanabhuni. all rights reserved.
+- **GitHub Profile**: https://github.com/nikithpadmanabhuni
 - **License**: MIT
 - **Inference Engine**: Google MediaPipe Hands (21 3D landmarks, WebAssembly)
 - **Target Performance**: 60 FPS rendering, <16ms end-to-end latency

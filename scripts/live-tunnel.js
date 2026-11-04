@@ -77,6 +77,10 @@ https://github.com/nikithpadmanabhuni/air-draw
 🚀 GITHUB PAGES:
 https://nikithpadmanabhuni.github.io/air-draw/
 
+👤 AUTHOR & COPYRIGHT:
+made by nikith padmanabhuni • all rights reserved
+https://github.com/nikithpadmanabhuni
+
 ------------------------------------------------------------------------
 📸 Camera & Drawing Notes:
 - Modern web browsers require HTTPS for camera access (getUserMedia).

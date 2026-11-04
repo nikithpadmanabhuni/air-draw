@@ -11,7 +11,9 @@
         content="AI draw free online. Use your webcam and hand gestures to sketch, paint, and draw in the air with real-time AI hand tracking.">
     <meta name="keywords"
         content="ai draw, AI air draw web, air draw with hand gestures online, AI webcam gesture drawing app, free air drawing web tool, touchless drawing, mediapipe hands, computer vision draw, hand tracking canvas, neon brush">
-    <meta name="author" content="Nikith Padmanabhuni">
+    <meta name="author" content="nikith padmanabhuni">
+    <meta name="creator" content="nikith padmanabhuni">
+    <meta name="copyright" content="made by nikith padmanabhuni. all rights reserved.">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <link rel="canonical" href="https://air-draw-pro-72a8c.web.app/">
     <link rel="help" href="llms.txt" type="text/markdown" title="LLM Context Documentation">
@@ -83,9 +85,19 @@
           },
           "author": {
             "@type": "Person",
-            "name": "Nikith Padmanabhuni",
+            "name": "nikith padmanabhuni",
             "url": "https://github.com/nikithpadmanabhuni"
           },
+          "creator": {
+            "@type": "Person",
+            "name": "nikith padmanabhuni",
+            "url": "https://github.com/nikithpadmanabhuni"
+          },
+          "copyrightHolder": {
+            "@type": "Person",
+            "name": "nikith padmanabhuni"
+          },
+          "copyrightNotice": "made by nikith padmanabhuni. all rights reserved.",
           "publisher": {
             "@type": "Organization",
             "name": "AirDraw Pro Open Source Project",
@@ -887,6 +899,77 @@
             transform: translateX(-50%) translateY(0);
         }
 
+        /* Site Attribution Badge & Credits */
+        #appFooterBadge {
+            position: absolute;
+            bottom: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 22;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            background: rgba(6, 7, 10, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 9999px;
+            font-size: 11px;
+            letter-spacing: 0.3px;
+            color: var(--text-secondary);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+            pointer-events: auto;
+            user-select: none;
+            white-space: nowrap;
+            transition: all 0.25s ease;
+        }
+
+        #appFooterBadge:hover {
+            border-color: rgba(0, 229, 255, 0.4);
+            background: rgba(6, 7, 10, 0.88);
+            box-shadow: 0 4px 20px rgba(0, 229, 255, 0.2);
+            color: var(--text-primary);
+        }
+
+        #appFooterBadge a,
+        .loading-footer a,
+        .cheatsheet-credits a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease, text-shadow 0.2s ease;
+        }
+
+        #appFooterBadge a:hover,
+        .loading-footer a:hover,
+        .cheatsheet-credits a:hover {
+            color: #fff;
+            text-shadow: 0 0 8px var(--accent-cyan);
+            text-decoration: underline;
+        }
+
+        .footer-dot {
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .loading-footer {
+            margin-top: 26px;
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 0.4px;
+            text-align: center;
+        }
+
+        .cheatsheet-credits {
+            margin-top: 8px;
+            padding-top: 6px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 10px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
         /* Loading Screen */
         #loadingScreen {
             position: absolute;
@@ -1249,6 +1332,15 @@
             .gesture-desc {
                 font-size: 9.5px;
             }
+
+            #appFooterBadge {
+                bottom: 8px;
+                font-size: 9.5px;
+                padding: 3px 10px;
+                gap: 4px;
+                background: rgba(6, 7, 10, 0.88);
+                max-width: calc(100vw - 20px);
+            }
         }
     </style>
 </head>
@@ -1448,7 +1540,7 @@
             <button class="tool-btn" id="shortcutsBtn" title="Keyboard & Gesture Help (Key: ?)"
                 onclick="openShortcutsModal()" aria-label="Help">❓</button>
             <a class="tool-btn" id="githubLinkBtn" href="https://github.com/nikithpadmanabhuni/air-draw" target="_blank"
-                rel="noopener noreferrer" title="View AirDraw Pro on GitHub" aria-label="GitHub Repository"
+                rel="noopener noreferrer" title="View AirDraw Pro on GitHub (made by nikith padmanabhuni)" aria-label="GitHub Repository"
                 style="text-decoration: none; display: flex; align-items: center; justify-content: center; color: var(--text-primary);">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
@@ -1573,10 +1665,20 @@
                     </div>
                 </div>
             </div>
+            <div class="cheatsheet-credits">
+                made by <a href="https://github.com/nikithpadmanabhuni" target="_blank" rel="noopener noreferrer">nikith padmanabhuni</a> &bull; all rights reserved
+            </div>
         </aside>
 
         <!-- Floating Notification Pill -->
         <div id="notificationToast" role="status" aria-live="polite">✏️ Pen Mode Activated</div>
+
+        <!-- Site Attribution Badge -->
+        <footer id="appFooterBadge" class="app-footer-badge" aria-label="Site credits and copyright">
+            <span>made by <a href="https://github.com/nikithpadmanabhuni" target="_blank" rel="noopener noreferrer">nikith padmanabhuni</a></span>
+            <span class="footer-dot">&bull;</span>
+            <span>all rights reserved</span>
+        </footer>
 
         <!-- Loading Screen -->
         <div id="loadingScreen">
@@ -1587,6 +1689,9 @@
             <button class="fallback-btn" id="startWithoutCamBtn" onclick="bypassCameraLoading()">
                 Continue with Mouse & Touch Drawing 🖱️
             </button>
+            <div class="loading-footer">
+                made by <a href="https://github.com/nikithpadmanabhuni" target="_blank" rel="noopener noreferrer">nikith padmanabhuni</a> &bull; all rights reserved
+            </div>
         </div>
     </main>
 
@@ -1672,6 +1777,10 @@
                 <div style="line-height: 1.6;">
                     <div>• 📦 <b>GitHub Repo:</b> <a href="https://github.com/nikithpadmanabhuni/air-draw" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: underline;">github.com/nikithpadmanabhuni/air-draw</a></div>
                     <div>• 🚀 <b>24/7 Web App:</b> <a href="https://nikithpadmanabhuni.github.io/air-draw/" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: underline;">nikithpadmanabhuni.github.io/air-draw</a></div>
+                    <div>• 👤 <b>Author:</b> <a href="https://github.com/nikithpadmanabhuni" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: underline;">nikith padmanabhuni</a></div>
+                </div>
+                <div style="margin-top: 8px; font-size: 10px; color: var(--text-muted); border-top: 1px solid rgba(0, 229, 255, 0.15); padding-top: 6px; text-align: center;">
+                    made by nikith padmanabhuni &bull; all rights reserved
                 </div>
             </div>
             <p style="font-size: 11px; color: var(--accent-cyan); margin-top: 8px;">

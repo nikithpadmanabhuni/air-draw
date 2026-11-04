@@ -144,3 +144,15 @@ You can operate every element of AirDraw Pro **exclusively using your fingers in
 - **Tactile Web Audio Synthesizer**: Zero-dependency synthetic audio chimes for tactile feedback.
 - **Dual-Input Fallback**: Direct mouse and touchscreen drawing support when camera is unavailable.
 
+---
+
+## 👤 Author & Copyright
+
+**made by nikith padmanabhuni • all rights reserved**
+
+- **Author**: [nikith padmanabhuni](https://github.com/nikithpadmanabhuni)
+- **GitHub Repository**: [github.com/nikithpadmanabhuni/air-draw](https://github.com/nikithpadmanabhuni/air-draw)
+- **Live 24/7 Web App (GitHub Pages)**: [nikithpadmanabhuni.github.io/air-draw](https://nikithpadmanabhuni.github.io/air-draw/)
+- **Live Production App (Firebase)**: [air-draw-pro-72a8c.web.app](https://air-draw-pro-72a8c.web.app/)
+
+
