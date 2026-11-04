@@ -26,8 +26,10 @@
     <meta name="apple-mobile-web-app-title" content="AirDraw Pro">
     <meta name="format-detection" content="telephone=no">
     <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%2306070a' stroke='%2300e5ff' stroke-width='6'/%3E%3Ccircle cx='50' cy='50' r='18' fill='%23ff007f'/%3E%3C/svg%3E">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2306070a'/%3E%3Ccircle cx='50' cy='50' r='36' stroke='%2300e5ff' stroke-width='8' fill='none'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23ff007f'/%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512.png">
 
     <!-- Open Graph Protocol (SEO / Social Sharing) -->
     <meta property="og:type" content="website">
@@ -930,6 +932,28 @@
             pointer-events: none !important;
         }
 
+        /* PWA Install Button */
+        #installAppBtn {
+            position: relative;
+        }
+
+        #installAppBtn.highlight {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+            animation: install-pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes install-pulse {
+            0%, 100% {
+                box-shadow: 0 0 6px rgba(0, 229, 255, 0.3);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 14px rgba(0, 229, 255, 0.8);
+                transform: scale(1.06);
+            }
+        }
+
         /* Site Attribution Badge & Credits */
         #appFooterBadge {
             position: absolute;
@@ -1570,6 +1594,8 @@
                 aria-label="Toggle Audio">🔊</button>
             <button class="tool-btn" id="shortcutsBtn" title="Keyboard & Gesture Help (Key: ?)"
                 onclick="openShortcutsModal()" aria-label="Help">❓</button>
+            <button class="tool-btn" id="installAppBtn" title="Install AirDraw Pro App (PWA)"
+                onclick="handleInstallApp()" aria-label="Install App">📲</button>
             <button class="tool-btn" id="fullscreenBtn" title="Toggle Fullscreen (Key: F)" onclick="toggleFullscreen()"
                 aria-label="Fullscreen">⛶</button>
         </header>
@@ -1793,6 +1819,8 @@
                 <div>Mute / Unmute Audio Sound FX</div>
                 <div><span class="key-badge">X</span></div>
                 <div>Switch Camera (Front Selfie / Rear)</div>
+                <div><span class="key-badge">I</span></div>
+                <div>Install App (PWA to Home Screen)</div>
                 <div><span class="key-badge">F</span></div>
                 <div>Toggle Fullscreen</div>
             </div>
@@ -1816,18 +1844,138 @@
         </div>
     </dialog>
 
+    <!-- PWA Install Guidance Dialog -->
+    <dialog id="installModal" closedby="any" aria-labelledby="installModalTitle">
+        <h2 id="installModalTitle" class="dialog-title">📲 Install AirDraw Pro</h2>
+        <div class="dialog-body" id="installModalBody" style="line-height: 1.6; font-size: 13px;">
+            <!-- Injected dynamically by JS -->
+        </div>
+        <div class="dialog-actions">
+            <button type="button" class="btn-modern btn-modern-ghost"
+                onclick="document.getElementById('installModal').close()">Close</button>
+            <button type="button" class="btn-modern btn-modern-primary" id="installConfirmBtn"
+                onclick="executeNativeInstallPrompt()">Install Now</button>
+        </div>
+    </dialog>
+
     <script>
         // Ensure no stale cached GitHub elements remain
         (function() {
             try {
                 document.querySelectorAll('#githubLinkBtn, [id*="github"], a[href*="github.com"]').forEach(el => el.remove());
-                if ('serviceWorker' in navigator) {
-                    navigator.serviceWorker.getRegistrations().then(regs => {
-                        for (let reg of regs) reg.unregister();
-                    });
-                }
             } catch (e) {}
         })();
+
+        // ==================== PWA INSTALL & SERVICE WORKER ====================
+        let deferredInstallPrompt = null;
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js').then((reg) => {
+                    console.log('[PWA] Service Worker registered:', reg.scope);
+                }).catch((err) => {
+                    console.warn('[PWA] Service Worker registration failed:', err);
+                });
+            });
+        }
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredInstallPrompt = e;
+            const btn = document.getElementById('installAppBtn');
+            if (btn) {
+                btn.classList.add('highlight');
+                btn.title = 'Install AirDraw Pro App (Key: I)';
+            }
+        });
+
+        window.addEventListener('appinstalled', () => {
+            deferredInstallPrompt = null;
+            const btn = document.getElementById('installAppBtn');
+            if (btn) btn.classList.remove('highlight');
+            showToast('🎉 AirDraw Pro installed successfully!');
+        });
+
+        function isAppStandalone() {
+            return window.matchMedia('(display-mode: standalone)').matches ||
+                   window.navigator.standalone === true ||
+                   document.referrer.includes('android-app://');
+        }
+
+        function handleInstallApp() {
+            getAudioContext();
+            playSound('select');
+
+            if (isAppStandalone()) {
+                showToast('✨ AirDraw Pro is already installed & running as an app!');
+                return;
+            }
+
+            if (deferredInstallPrompt) {
+                deferredInstallPrompt.prompt();
+                deferredInstallPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult && choiceResult.outcome === 'accepted') {
+                        showToast('🚀 Installing AirDraw Pro...');
+                    }
+                    deferredInstallPrompt = null;
+                    const btn = document.getElementById('installAppBtn');
+                    if (btn) btn.classList.remove('highlight');
+                });
+                return;
+            }
+
+            const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            const isSafari = /Safari/.test(navigator.userAgent) && !/Chrome|CriOS|FxiOS|EdgiOS/.test(navigator.userAgent);
+            const modal = document.getElementById('installModal');
+            const body = document.getElementById('installModalBody');
+            const confirmBtn = document.getElementById('installConfirmBtn');
+
+            if (isIos || isSafari) {
+                if (body) {
+                    body.innerHTML = `
+                        <div style="background: rgba(0, 229, 255, 0.08); border: 1px solid rgba(0, 229, 255, 0.25); border-radius: 12px; padding: 14px; margin-bottom: 12px;">
+                            <div style="font-weight: 700; color: var(--accent-cyan); font-size: 14px; margin-bottom: 8px;">🍏 Install on iPhone & iPad:</div>
+                            <ol style="margin: 0; padding-left: 20px; line-height: 1.8;">
+                                <li>Tap the <strong>Share</strong> button <span style="font-size: 15px;">⎋</span> (or <span style="font-size: 15px;">⬆️</span>) in Safari.</li>
+                                <li>Scroll down and tap <strong>Add to Home Screen</strong> <span style="font-size: 15px;">➕</span>.</li>
+                                <li>Tap <strong>Add</strong> in the top-right corner to finish!</li>
+                            </ol>
+                        </div>
+                        <p style="font-size: 11px; color: var(--text-muted); margin: 0;">Once added, AirDraw Pro opens in full-screen standalone mode with 60 FPS spatial drawing!</p>
+                    `;
+                }
+                if (confirmBtn) confirmBtn.style.display = 'none';
+                if (modal) modal.showModal();
+                return;
+            }
+
+            if (body) {
+                body.innerHTML = `
+                    <div style="background: rgba(0, 229, 255, 0.08); border: 1px solid rgba(0, 229, 255, 0.25); border-radius: 12px; padding: 14px; margin-bottom: 12px;">
+                        <div style="font-weight: 700; color: var(--accent-cyan); font-size: 14px; margin-bottom: 8px;">💻 Install AirDraw Pro as an App:</div>
+                        <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
+                            <li><strong>Google Chrome / Edge:</strong> Click the <strong>Install</strong> icon (⊞ or ⬇️) in your browser address bar.</li>
+                            <li><strong>Android:</strong> Tap the browser menu (⋮) &gt; <strong>Install app</strong> or <strong>Add to Home screen</strong>.</li>
+                            <li><strong>Desktop:</strong> Works directly offline with hardware-accelerated tracking!</li>
+                        </ul>
+                    </div>
+                    <p style="font-size: 11px; color: var(--text-muted); margin: 0;">Enjoy full offline support and 60 FPS contactless air drawing.</p>
+                `;
+            }
+            if (confirmBtn) confirmBtn.style.display = 'none';
+            if (modal) modal.showModal();
+        }
+
+        function executeNativeInstallPrompt() {
+            if (deferredInstallPrompt) {
+                deferredInstallPrompt.prompt();
+                deferredInstallPrompt.userChoice.then(() => {
+                    deferredInstallPrompt = null;
+                });
+            }
+            const modal = document.getElementById('installModal');
+            if (modal && modal.open) modal.close();
+        }
 
         // ==================== CONFIGURATION & CONSTANTS ====================
         const CONFIG = {
@@ -3861,6 +4009,7 @@
                 case 'c': openClearModal(); break;
                 case 'm': toggleAudio(); break;
                 case 'f': toggleFullscreen(); break;
+                case 'i': handleInstallApp(); break;
                 case 'x': switchCamera(); break;
                 case '?': openShortcutsModal(); break;
                 case '1': setColor(PALETTE[0]); break;
