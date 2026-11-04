@@ -24,6 +24,7 @@ cloudflare.pid
 auto-sync.log
 *.log
 *.pid
+.firebase/
 
 # Temporary Files & Editor Swaps
 *.tmp

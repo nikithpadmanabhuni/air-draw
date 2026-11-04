@@ -1,10 +1,9 @@
 # ==============================================================================
-# robots.txt — AirDraw Pro (SEO, AEO & GEO Universal Standards)
+# robots.txt — AirDraw (SEO, AEO & GEO Universal Standards)
 # ==============================================================================
 
 User-agent: *
 Allow: /
-Disallow:
 
 # AI Search & Answer Engine Crawlers (AEO / GEO Permitted)
 User-agent: GPTBot
@@ -31,7 +30,6 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-# Sitemap & LLM Specification Grounding
+# Sitemaps for Google Search Console & Crawlers
+Sitemap: https://air-draw-pro-72a8c.web.app/sitemap.xml
 Sitemap: https://nikithpadmanabhuni.github.io/air-draw/sitemap.xml
-# LLMs.txt for Large Language Models & AI Retrieval:
-# https://nikithpadmanabhuni.github.io/air-draw/llms.txt
