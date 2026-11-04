@@ -2,7 +2,7 @@
 
 [![Firebase Hosting](https://img.shields.io/badge/Firebase_Hosting-Live_App-FFA611?style=for-the-badge&logo=firebase&logoColor=white)](https://air-draw-pro-72a8c.web.app/)
 [![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-Live_Web_App-blue?style=for-the-badge&logo=github)](https://nikithpadmanabhuni.github.io/air-draw/)
-[![Live Tunnel](https://img.shields.io/badge/Live_Tunnel-Cloudflare_HTTPS-brightgreen?style=for-the-badge&logo=cloudflare)](https://participants-westminster-regards-injection.trycloudflare.com)
+[![Live Tunnel](https://img.shields.io/badge/Live_Tunnel-Cloudflare_HTTPS-brightgreen?style=for-the-badge&logo=cloudflare)](https://gotten-clinton-thu-league.trycloudflare.com)
 [![GitHub Repository](https://img.shields.io/badge/GitHub-nikithpadmanabhuni%2Fair--draw-181717?style=for-the-badge&logo=github)](https://github.com/nikithpadmanabhuni/air-draw)
 [![Security Audit](https://img.shields.io/badge/Security_Audit-Passed-success?style=for-the-badge&logo=shield)](scripts/security-audit.sh)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
@@ -17,7 +17,7 @@ Access AirDraw Pro on any device anywhere in the world:
 
 | Access Method | URL / Link | Target Devices | Notes |
 | :--- | :--- | :--- | :--- |
-| **🌍 Global Public HTTPS** | **[furthermore-transform-timer-boost.trycloudflare.com](https://participants-westminster-regards-injection.trycloudflare.com)** | iPhone, Android, iPad, PC | Full HTTPS webcam permissions worldwide |
+| **🌍 Global Public HTTPS** | **[furthermore-transform-timer-boost.trycloudflare.com](https://gotten-clinton-thu-league.trycloudflare.com)** | iPhone, Android, iPad, PC | Full HTTPS webcam permissions worldwide |
 | **🔥 Firebase Hosting (Production)** | **[air-draw-pro-72a8c.web.app](https://air-draw-pro-72a8c.web.app/)** | All devices & webcams | Official Google CDN production hosting |
 | **🚀 GitHub Pages 24/7** | **[nikithpadmanabhuni.github.io/air-draw](https://nikithpadmanabhuni.github.io/air-draw/)** | Any modern browser | Deployed automatically on every commit |
 | **📱 Local Wi-Fi (LAN)** | **`http://192.168.0.121:3000`** | Phones & laptops on Wi-Fi | Zero latency on local network |

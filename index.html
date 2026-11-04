@@ -902,6 +902,13 @@
             transform: translateX(-50%) translateY(0);
         }
 
+        /* Guarantee GitHub Option is Permanently Removed from Toolbar */
+        #githubLinkBtn, a[aria-label="GitHub Repository"], a[href*="github.com"] {
+            display: none !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
         /* Site Attribution Badge & Credits */
         #appFooterBadge {
             position: absolute;
@@ -1789,6 +1796,18 @@
     </dialog>
 
     <script>
+        // Ensure no stale cached GitHub elements remain
+        (function() {
+            try {
+                document.querySelectorAll('#githubLinkBtn, [id*="github"], a[href*="github.com"]').forEach(el => el.remove());
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.getRegistrations().then(regs => {
+                        for (let reg of regs) reg.unregister();
+                    });
+                }
+            } catch (e) {}
+        })();
+
         // ==================== CONFIGURATION & CONSTANTS ====================
         const CONFIG = {
             smoothingFactor: 0.35,
