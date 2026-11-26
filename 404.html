@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>404 — Page Not Found | AirDraw</title>
+    <style>
+        :root {
+            --bg-base: #06070a;
+            --accent-cyan: #00e5ff;
+            --accent-pink: #ff007f;
+            --text-primary: #f0f3fa;
+            --text-muted: #8e9bb0;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background:
+                radial-gradient(circle at 20% 25%, rgba(0, 229, 255, 0.12), transparent 45%),
+                radial-gradient(circle at 80% 75%, rgba(255, 0, 127, 0.12), transparent 45%),
+                var(--bg-base);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            text-align: center;
+        }
+        .card {
+            max-width: 480px;
+            width: 100%;
+            padding: 40px 32px;
+            border-radius: 20px;
+            background: rgba(16, 18, 28, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        .code {
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        h1 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 28px;
+        }
+        a.btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, var(--accent-cyan), #3b82f6);
+            color: #06070a;
+            font-weight: 700;
+            font-size: 15px;
+            text-decoration: none;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        a.btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(0, 229, 255, 0.35);
+        }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <div class="code">404</div>
+        <h1>Page not found — back to AirDraw</h1>
+        <p>The page you requested does not exist on AirDraw. Return to the canvas to draw in the air with hand gestures.</p>
+        <a class="btn" href="/">Back to AirDraw</a>
+    </main>
+</body>
+</html>
+
